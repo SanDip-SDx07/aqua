@@ -2,6 +2,7 @@ import React from "react";
 import {ScrollView, StyleSheet} from "react-native";
 import SubsCard from "./views/SubsCard";
 import SubsFormCard from "./views/SubsFormCard";
+import ActivationCard from "./views/ActivationCard";
 
 export default function App() {
     return (
@@ -11,6 +12,15 @@ export default function App() {
         >
             <SubsCard/>
             <SubsFormCard/>
+            <ActivationCard
+                amount={800}
+                totalJars={4}
+                startDate="18 Oct 2025"
+                lastDelivery="17 Oct 2025"
+                onBook={() => console.log("Book now")}
+                onUpgrade={() => console.log("Upgrade")}
+                onCancel={() => console.log("Cancel")}
+            />
         </ScrollView>
     );
 }
