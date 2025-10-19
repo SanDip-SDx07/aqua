@@ -1,86 +1,124 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSubsState } from "./SubscriptionContext";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Droplet, Info } from "lucide-react-native";
+import SubscriptionTerms from "./SubscriptionTerms";
 
-export default function SubsCard() {
-  const { dispatch } = useSubsState();
+export default function SubscriptionCard() {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View style={styles.card}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Water Jar Subscription</Text>
-        <Text style={styles.subTitle}>20L Jar • ₹200 Deposit</Text>
+    <LinearGradient
+      colors={["#E0F7FA", "#B2EBF2"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.card}
+    >
+      {/* Top: Icon + Features */}
+      <View style={styles.topRow}>
+        <View style={styles.iconContainer}>
+          <Droplet size={50} color="#4A90E2" />
+        </View>
+
+        <View style={styles.featuresContainer}>
+          <Text style={styles.header}>Exclusive Water Subscription</Text>
+          <Text style={styles.feature}>✅ No Container Deposits / Rent</Text>
+          <Text style={styles.feature}>✅ No Hidden Costs</Text>
+          <Text style={styles.feature}>✅ 20% OFF on every refill</Text>
+          <Text style={styles.feature}>
+            ✅ Priority delivery within 30 minutes
+          </Text>
+          <Text style={styles.feature}>✅ Hygiene tracking</Text>
+          <Text style={styles.priceBadge}>Costs Less than ₹10/month</Text>
+        </View>
       </View>
 
-      <View style={styles.details}>
-        <Text style={styles.price}>₹40 / Refill</Text>
-        <Text style={styles.desc}>
-          Enjoy hassle-free doorstep delivery every day or on demand.
-        </Text>
-        <Text style={styles.desc}>
-          Cancel anytime. Refundable upon returning all jars
-        </Text>
-        <Text style={styles.desc}>Learn more...</Text>
+      {/* Bottom: Buttons */}
+      <View style={styles.bottomRow}>
+        <TouchableOpacity style={styles.subscribeBtn}>
+          <Text style={styles.subscribeText}>Explore Premium</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.infoBtn}
+          onPress={() => setModalVisible(true)}
+        >
+          <Info size={24} color="#000" />
+          <Text style={styles.infoText}>Learn More</Text>
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => dispatch({ type: "SUBSCRIBE" })}
+      {/* Modal placeholder */}
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
       >
-        <Text style={styles.buttonText}>Subscribe Now</Text>
-      </TouchableOpacity>
-    </View>
+        <SubscriptionTerms />
+      </Modal>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
     borderRadius: 16,
-    padding: 20,
-    marginVertical: 10,
-    width: "100%",
+    padding: 16,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.08,
-    shadowRadius: 5,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+    width: "100%",
+  },
+  topRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
+  iconContainer: {
+    marginRight: 12,
+  },
+  featuresContainer: {
+    flex: 1,
   },
   header: {
-    marginBottom: 10,
-  },
-  title: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#222",
-  },
-  subTitle: {
-    fontSize: 14,
-    color: "#666",
-  },
-  details: {
-    marginVertical: 10,
-  },
-  price: {
-    fontSize: 16,
     fontWeight: "bold",
-    color: "#0088ff",
-    marginBottom: 6,
+    marginBottom: 8,
   },
-  desc: {
-    fontSize: 13,
-    color: "#555",
-    lineHeight: 18,
+  feature: {
+    fontSize: 14,
+    marginBottom: 4,
   },
-  button: {
-    backgroundColor: "#007bff",
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: "center",
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "#fff",
+  priceBadge: {
+    marginTop: 8,
     fontWeight: "600",
-    fontSize: 15,
+    color: "#27AE60",
+  },
+  bottomRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  subscribeBtn: {
+    backgroundColor: "#000",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 6,
+  },
+  subscribeText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  infoBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  infoText: {
+    color: "#000",
+    marginLeft: 4,
+    fontWeight: "500",
   },
 });
