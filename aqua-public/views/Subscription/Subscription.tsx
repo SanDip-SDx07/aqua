@@ -6,6 +6,7 @@ import SubsCard from "./SubsCard";
 import SubscribedCard from "./SubscribedCard";
 import { ScrollView, StyleSheet } from "react-native";
 import SubsFormCard from "./SubsFormCard";
+import QualityAssuranceCard from "../QualityAssurance/QualityAssuranceCard";
 
 export default function Subscription({
   children,
@@ -27,6 +28,7 @@ function SubscriptionMain() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
+      <QualityAssuranceCard />
       {subsState?.isSubscribed ? (
         <SubscribedCard />
       ) : (
