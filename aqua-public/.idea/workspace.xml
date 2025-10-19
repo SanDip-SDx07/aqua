@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="f34bd227-b57d-4bb3-a7b7-2dc93c7a46b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Notification.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Orders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Orders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Wallets.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -68,6 +77,12 @@
       </map>
     </option>
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sandi\Downloads\Projects\aqua\aqua-public\navigations" />
+      <recent name="C:\Users\sandi\Downloads\Projects\aqua\aqua-public" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -84,6 +99,7 @@
       <updated>1760795549401</updated>
       <workItem from="1760795550962" duration="2826000" />
       <workItem from="1760808019627" duration="3647000" />
+      <workItem from="1760843785451" duration="8616000" />
     </task>
     <servers />
   </component>
