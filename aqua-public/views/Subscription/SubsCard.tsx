@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     marginTop: 8,
     fontWeight: "600",
-    color: "#d3473dff",
+    color: "#000",
     textAlign: "center",
   },
   bottomRow: {
