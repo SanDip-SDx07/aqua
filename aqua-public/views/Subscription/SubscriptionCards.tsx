@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   benefitsContainer: { marginVertical: 10 },
-  benefitItem: { marginTop: 3 },
+  benefitItem: { marginTop: 3, flexDirection: "row", gap: 4 },
   billingContainer: {
     flexDirection: "row",
     backgroundColor: "#d8e6fc",
@@ -248,7 +248,12 @@ const styles = StyleSheet.create({
   },
   notesContainer: { marginTop: 10 },
   notesTitle: { marginTop: 8, fontSize: 12, fontWeight: "700" },
-  notesItem: { fontSize: 12, marginTop: 2 },
+  notesItem: {
+    fontSize: 12,
+    flexDirection: "row",
+    gap: 4,
+    alignItems: "center",
+  },
   subscribeButton: {
     backgroundColor: "#007aff",
     borderRadius: 10,
