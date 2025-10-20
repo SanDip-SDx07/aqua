@@ -1,4 +1,3 @@
-// QualityAssuranceCard.tsx
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -15,7 +14,7 @@ const Section: React.FC<SectionProps> = ({ title, children }) => (
   </View>
 );
 
-export default function QualityAssuranceInfo() {
+export default function QAIModel() {
   return (
     <ScrollView style={styles.container}>
       {/* 1. Purity at Every Step */}

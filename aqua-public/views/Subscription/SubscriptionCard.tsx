@@ -9,14 +9,8 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Droplet, Info } from "lucide-react-native";
-import SubscriptionTerms from "./SubscriptionTerms";
-
-import {
-  EnterpriseSubscription,
-  FamilySubscription,
-  IndividualSubscription,
-  StandardSubscription,
-} from "./SubscriptionVarents";
+import SubscriptionTerms from "../Models/SubscriptionTermsModel";
+import SubscriptionVarents from "./SubscriptionVarents";
 
 export default function SubscriptionCard() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -74,14 +68,7 @@ export default function SubscriptionCard() {
         {activeModel === "LearnMore" ? (
           <SubscriptionTerms />
         ) : activeModel === "ExplorePremium" ? (
-          <>
-            <ScrollView>
-              <IndividualSubscription />
-              <StandardSubscription />
-              <FamilySubscription />
-              <EnterpriseSubscription />
-            </ScrollView>
-          </>
+          <SubscriptionVarents />
         ) : null}
       </Modal>
     </LinearGradient>

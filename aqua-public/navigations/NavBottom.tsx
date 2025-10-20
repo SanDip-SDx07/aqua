@@ -1,8 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { LinearGradient } from "expo-linear-gradient";
-
 import { Home, ClipboardList, Wallet, Bell, User } from "lucide-react-native";
 
 import HomeScreen from "../screens/Home";

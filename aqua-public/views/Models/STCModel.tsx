@@ -14,7 +14,7 @@ const Section: React.FC<SectionProps> = ({ title, children }) => (
   </View>
 );
 
-export default function SubscriptionTerms() {
+export default function STCModel() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>

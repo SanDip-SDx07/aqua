@@ -2,11 +2,11 @@ import SubscriptionContextProvider, {
   useSubsState,
 } from "./SubscriptionContext";
 
-import SubsCard from "./SubsCard";
+import SubsCard from "./SubscriptionCard";
 import SubscribedCard from "./SubscribedCard";
 import { ScrollView, StatusBar, StyleSheet } from "react-native";
 import SubsFormCard from "./SubsFormCard";
-import QualityAssuranceCard from "../QualityAssurance/QualityAssuranceCard";
+import QualityAssuranceCard from "../QualityAssuranceModel/QualityAssuranceCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../constants/styles";
 
@@ -17,10 +17,6 @@ export default function Subscription({
 }) {
   return (
     <SubscriptionContextProvider>
-      <StatusBar
-        barStyle={"light-content"}
-        backgroundColor={theme["light"]?.colors?.primary}
-      />
       <SubscriptionMain />
       {children}
     </SubscriptionContextProvider>

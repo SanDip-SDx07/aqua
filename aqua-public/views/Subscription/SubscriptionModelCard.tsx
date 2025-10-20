@@ -1,12 +1,18 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from "react-native";
 
 interface SubscriptionModelCardProps {
   subsType: "Individual" | "Standard" | "Family" | "Enterprise";
   numberOfPremiumAccount: number;
   pricePerMonth: number;
+  priceAYear: number;
   processingFee: number;
-  features: string[];
   color?: string;
 }
 
@@ -14,14 +20,14 @@ export function SubscriptionModelCard({
   subsType,
   numberOfPremiumAccount,
   pricePerMonth,
+  priceAYear,
   processingFee,
-  features,
   color = "#2196f3",
 }: SubscriptionModelCardProps) {
   return (
     <View
       style={{
-        backgroundColor: "#fff",
+        backgroundColor: "#f4f9ff",
         borderRadius: 16,
         shadowColor: "#000",
         shadowOpacity: 0.1,
@@ -36,7 +42,7 @@ export function SubscriptionModelCard({
         <Text style={{ fontSize: 18, fontWeight: "700", color }}>Premium</Text>
         <Text style={{ fontSize: 22, fontWeight: "900" }}>{subsType}</Text>
         <Text style={{ marginTop: 4, fontSize: 16 }}>
-          ₹{pricePerMonth}/month
+          ₹{pricePerMonth}/month ({priceAYear}/year)
         </Text>
         <Text style={{ fontSize: 13, color: "#555" }}>
           + ₹{processingFee} processing fee
@@ -48,11 +54,13 @@ export function SubscriptionModelCard({
         <Text style={{ fontWeight: "600" }}>
           {numberOfPremiumAccount} Premium Account
         </Text>
-        {features.map((item, idx) => (
-          <Text key={idx} style={{ marginTop: 4 }}>
-            • {item}
-          </Text>
-        ))}
+
+        <Text style={{ marginTop: 4 }}>
+          {numberOfPremiumAccount} Container Access
+        </Text>
+        <Text style={{ marginTop: 4 }}>20% OFF on every refill</Text>
+        <Text style={{ marginTop: 4 }}>No Container Deposits / Rent</Text>
+        <Text style={{ marginTop: 4 }}>Basic Priority Support</Text>
       </View>
 
       {/* Subscribe Button */}
@@ -104,7 +112,7 @@ export function CustomSubscriptionCard() {
         borderWidth: 1,
         borderColor: "#cfe8ff",
         padding: 20,
-        marginVertical: 12,
+        marginBottom: 16,
         shadowColor: "#000",
         shadowOpacity: 0.05,
         shadowRadius: 3,
@@ -144,11 +152,18 @@ export function CustomSubscriptionCard() {
       {/* Price Range */}
       <View style={{ marginVertical: 10 }}>
         <Text style={{ fontSize: 16, fontWeight: "600", color: "#007aff" }}>
-          ₹10 – ₹1000 / month (based on your plan)
+          ₹10 / month (based on your plan)
         </Text>
         <Text style={{ fontSize: 13, color: "#555" }}>
           + ₹20 standard processing fee
         </Text>
+      </View>
+
+      <CustomSubscription />
+
+      <View style={styles.totalContainer}>
+        <Text style={styles.totalLabel}>Total</Text>
+        <Text style={styles.totalValue}>₹{"totalAmount"}</Text>
       </View>
 
       {/* CTA */}
@@ -170,8 +185,7 @@ export function CustomSubscriptionCard() {
       <View style={{ marginTop: 14 }}>
         <Text style={{ fontSize: 12, color: "#444", lineHeight: 18 }}>
           All jars remain property of AquaCare+ vendors and are barcoded for
-          tracking and hygiene. Deep cleaning is performed twice a week. Damaged
-          jars are replaced instantly.
+          tracking.
         </Text>
 
         <Text style={{ marginTop: 8, fontSize: 12, fontWeight: "700" }}>
@@ -194,3 +208,156 @@ export function CustomSubscriptionCard() {
     </View>
   );
 }
+
+export function CustomSubscription() {
+  const [count, setCount] = React.useState(1);
+  const [billingCycle, setBillingCycle] = React.useState<"Monthly" | "Yearly">(
+    "Monthly"
+  );
+
+  const basePrice = 99;
+  const totalAmount =
+    billingCycle === "Monthly" ? count * basePrice : count * basePrice * 10; // yearly = 10x months discount
+
+  const handleIncrease = () => setCount((prev) => prev + 1);
+  const handleDecrease = () => setCount((prev) => Math.max(1, prev - 1));
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.counterContainer}>
+        <TouchableOpacity style={styles.counterButton} onPress={handleDecrease}>
+          <Text style={styles.counterSymbol}>−</Text>
+        </TouchableOpacity>
+
+        <TextInput
+          value={String(count)}
+          editable={false}
+          style={styles.counterInput}
+        />
+
+        <TouchableOpacity style={styles.counterButton} onPress={handleIncrease}>
+          <Text style={styles.counterSymbol}>+</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.billingContainer}>
+        {["Monthly", "Yearly"].map((cycle) => (
+          <TouchableOpacity
+            key={cycle}
+            style={[
+              styles.billingButton,
+              billingCycle === cycle && styles.billingButtonActive,
+            ]}
+            onPress={() => setBillingCycle(cycle as "Monthly" | "Yearly")}
+          >
+            <Text
+              style={[
+                styles.billingText,
+                billingCycle === cycle && styles.billingTextActive,
+              ]}
+            >
+              {cycle}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+export const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+  },
+
+  // Counter
+  counterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+
+  counterButton: {
+    width: 45,
+    height: 45,
+    backgroundColor: "#e6f0ff",
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  counterSymbol: {
+    fontSize: 22,
+    color: "#007AFF",
+    fontWeight: "700",
+  },
+
+  counterInput: {
+    width: 70,
+    height: 45,
+    textAlign: "center",
+    borderWidth: 1,
+    borderColor: "#cce0ff",
+    borderRadius: 8,
+    marginHorizontal: 10,
+    fontSize: 18,
+    fontWeight: "600",
+    backgroundColor: "#fff",
+  },
+
+  // Billing Toggle
+  billingContainer: {
+    flexDirection: "row",
+    backgroundColor: "#d8e6fc",
+    borderRadius: 25,
+    overflow: "hidden",
+    marginBottom: 20,
+  },
+
+  billingButton: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+  },
+
+  billingButtonActive: {
+    backgroundColor: "#007AFF",
+  },
+
+  billingText: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#007AFF",
+  },
+
+  billingTextActive: {
+    color: "#fff",
+    fontWeight: "700",
+  },
+
+  // Total Display
+  totalContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+
+  totalLabel: {
+    fontSize: 16,
+    color: "#333",
+    fontWeight: "600",
+  },
+
+  totalValue: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "#007AFF",
+  },
+});

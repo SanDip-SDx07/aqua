@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Info } from "lucide-react-native";
-import QualityAssuranceInfo from "./QualityAssuranceInfo";
+import QualityAssuranceInfo from "../Models/QAIModel";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function QualityAssuranceCard(): React.ReactElement {

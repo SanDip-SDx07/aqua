@@ -1,4 +1,9 @@
-import { SubscriptionModelCard } from "./SubscriptionModelCard";
+import { ScrollView } from "react-native";
+import {
+  SubscriptionModelCard,
+  CustomSubscriptionCard,
+} from "./SubscriptionModelCard";
+import { theme } from "../../constants/styles";
 
 export function IndividualSubscription() {
   return (
@@ -6,14 +11,9 @@ export function IndividualSubscription() {
       subsType="Individual"
       numberOfPremiumAccount={1}
       pricePerMonth={10}
+      priceAYear={100}
       processingFee={20}
       color="#007BFF"
-      features={[
-        "1 Container Access",
-        "10% OFF on every refill",
-        "No Container Deposits / Rent",
-        "Basic Priority Support",
-      ]}
     />
   );
 }
@@ -22,15 +22,10 @@ export function StandardSubscription() {
     <SubscriptionModelCard
       subsType="Standard"
       numberOfPremiumAccount={2}
-      pricePerMonth={10}
+      pricePerMonth={20}
+      priceAYear={200}
       processingFee={20}
       color="#007BFF"
-      features={[
-        "1 Container Access",
-        "10% OFF on every refill",
-        "No Container Deposits / Rent",
-        "Basic Priority Support",
-      ]}
     />
   );
 }
@@ -39,15 +34,10 @@ export function FamilySubscription() {
     <SubscriptionModelCard
       subsType="Family"
       numberOfPremiumAccount={3}
-      pricePerMonth={10}
+      pricePerMonth={30}
+      priceAYear={300}
       processingFee={20}
       color="#007BFF"
-      features={[
-        "1 Container Access",
-        "10% OFF on every refill",
-        "No Container Deposits / Rent",
-        "Basic Priority Support",
-      ]}
     />
   );
 }
@@ -56,15 +46,30 @@ export function EnterpriseSubscription() {
     <SubscriptionModelCard
       subsType="Enterprise"
       numberOfPremiumAccount={6}
-      pricePerMonth={10}
+      pricePerMonth={60}
+      priceAYear={600}
       processingFee={20}
       color="#007BFF"
-      features={[
-        "1 Container Access",
-        "10% OFF on every refill",
-        "No Container Deposits / Rent",
-        "Basic Priority Support",
-      ]}
     />
+  );
+}
+
+// export CustomSubscriptionCard
+
+export default function SubscriptionVarents() {
+  return (
+    <ScrollView
+      style={{
+        flex: 1,
+        padding: 16,
+        backgroundColor: "#fff",
+      }}
+    >
+      <IndividualSubscription />
+      <StandardSubscription />
+      <FamilySubscription />
+      <EnterpriseSubscription />
+      <CustomSubscriptionCard />
+    </ScrollView>
   );
 }
