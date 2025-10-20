@@ -29,9 +29,10 @@ const BenefitsList = ({ items }: { items?: string[] }) => (
   <View style={styles.benefitsContainer}>
     {items &&
       items.map((item, idx) => (
-        <Text key={idx} style={styles.benefitItem}>
-          <CircleCheck size={20} /> {item}
-        </Text>
+        <View key={idx} style={styles.benefitItem}>
+          <CircleCheck size={20} />
+          <Text>{item}</Text>
+        </View>
       ))}
   </View>
 );
@@ -64,9 +65,10 @@ const NotesList = ({ title, notes }: { title?: string; notes?: string[] }) => (
     <Text style={styles.notesTitle}>{title}</Text>
     {notes &&
       notes.map((note, idx) => (
-        <Text key={idx} style={styles.notesItem}>
-          <CircleCheck size={10} /> {note}
-        </Text>
+        <View key={idx} style={styles.notesItem}>
+          <CircleCheck size={10} />
+          <Text>{note}</Text>
+        </View>
       ))}
   </View>
 );

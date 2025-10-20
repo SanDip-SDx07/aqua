@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Info } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+  Tabs: undefined;
+  AquaCareModal: undefined;
+  PremiumModal: undefined;
+  TermsModal: undefined;
+};
 
 export default function QualityAssuranceCard(): React.ReactElement {
-  // const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList, "Tabs">>();
 
   return (
     <LinearGradient
@@ -25,7 +35,10 @@ export default function QualityAssuranceCard(): React.ReactElement {
       </View>
 
       <View style={styles.bottomRow}>
-        <TouchableOpacity style={styles.infoBtn} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.infoBtn}
+          onPress={() => navigation.push("AquaCareModal")}
+        >
           <Info size={20} color="#000" />
           <Text style={styles.infoText}>Learn More</Text>
         </TouchableOpacity>
