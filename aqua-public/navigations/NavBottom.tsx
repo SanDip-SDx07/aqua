@@ -22,8 +22,7 @@ export default function NavBottom() {
       <BottomTabs.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerBackground: HeaderBackground,
-          headerTintColor: "#fff",
+          headerShown: false,
         }}
       >
         <BottomTabs.Screen
@@ -79,14 +78,3 @@ export default function NavBottom() {
     </NavigationContainer>
   );
 }
-
-const HeaderBackground = () => {
-  return (
-    <LinearGradient
-      colors={theme[curTheme].colors.headerGradient}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }} // horizontal gradient
-      style={{ flex: 1 }}
-    />
-  );
-};

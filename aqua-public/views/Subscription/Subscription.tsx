@@ -4,9 +4,11 @@ import SubscriptionContextProvider, {
 
 import SubsCard from "./SubsCard";
 import SubscribedCard from "./SubscribedCard";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StatusBar, StyleSheet } from "react-native";
 import SubsFormCard from "./SubsFormCard";
 import QualityAssuranceCard from "../QualityAssurance/QualityAssuranceCard";
+import { LinearGradient } from "expo-linear-gradient";
+import { theme } from "../../constants/styles";
 
 export default function Subscription({
   children,
@@ -15,6 +17,10 @@ export default function Subscription({
 }) {
   return (
     <SubscriptionContextProvider>
+      <StatusBar
+        barStyle={"light-content"}
+        backgroundColor={theme["light"]?.colors?.primary}
+      />
       <SubscriptionMain />
       {children}
     </SubscriptionContextProvider>
@@ -42,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f6f8fb",
+    // marginTop: 20,
   },
   contentContainer: {
     padding: 16,
@@ -49,6 +56,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start", // layout children vertically from the top
   },
 });
+
+// const HeaderBackground = () => {
+//   return (
+//     <LinearGradient
+//       colors={theme["light"].colors.headerGradient}
+//       start={{ x: 0, y: 0 }}
+//       end={{ x: 1, y: 0 }} // horizontal gradient
+//       style={{ flex: 1 }}
+//     />
+//   );
+// };
 
 {
   /* <ScrollView>
