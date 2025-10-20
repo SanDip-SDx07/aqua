@@ -1,8 +1,20 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Droplet, Info } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+type RootStackParamList = {
+  Tabs: undefined;
+  AquaCareModal: undefined;
+  PremiumModal: undefined;
+  TermsModal: undefined;
+};
 
 export default function SubsDisplayCard() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList, "Tabs">>();
+
   return (
     <LinearGradient
       colors={["#f0f8ff", "#cfe7fdff"]}
@@ -20,11 +32,17 @@ export default function SubsDisplayCard() {
       </View>
 
       <View style={styles.bottomRow}>
-        <TouchableOpacity style={styles.subscribeBtn} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.subscribeBtn}
+          onPress={() => navigation.push("PremiumModal")}
+        >
           <Text style={styles.subscribeText}>Explore Premium</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.infoBtn} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.infoBtn}
+          onPress={() => navigation.push("TermsModal")}
+        >
           <Info size={24} color="#000" />
           <Text style={styles.infoText}>Learn More</Text>
         </TouchableOpacity>
