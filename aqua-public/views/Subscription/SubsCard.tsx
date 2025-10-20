@@ -36,7 +36,7 @@ export default function SubscriptionCard() {
           {/* <GlassWater size={50} color="#000" /> */}
         </View>
         <Text style={styles.priceBadge}>
-          AquaCare+ Premium Worth Less-than Rs 10/month
+          AquaCare+ Exclusive Service Subscription
         </Text>
       </View>
 

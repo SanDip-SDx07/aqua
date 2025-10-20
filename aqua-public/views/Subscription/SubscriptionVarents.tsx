@@ -1,4 +1,4 @@
-import SubscriptionModelCard from "./SubscriptionModelCard";
+import { SubscriptionModelCard } from "./SubscriptionModelCard";
 
 export function IndividualSubscription() {
   return (
