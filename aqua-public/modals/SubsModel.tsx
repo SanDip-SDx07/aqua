@@ -1,6 +1,9 @@
 import { ScrollView } from "react-native";
-import { SubsBaseCard, CustomBaseCard } from "./SubscriptionCards";
-import { theme } from "../../constants/styles";
+import {
+  SubsBaseCard,
+  CustomBaseCard,
+} from "../views/Subscription/SubscriptionCards";
+import { theme } from "../constants/styles";
 
 export function IndividualSubscription() {
   return (
@@ -49,7 +52,7 @@ export function EnterpriseSubscription() {
 
 // export CustomSubscriptionCard
 
-export default function SubscriptionVarents() {
+export default function SubsModel() {
   return (
     <ScrollView
       style={{

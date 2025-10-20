@@ -2,7 +2,7 @@ import SubscriptionContextProvider, {
   useSubsState,
 } from "./SubscriptionContext";
 
-import SubsCard from "./SubscriptionCard";
+import SubsCard from "./SubsDisplayCard";
 import SubscribedCard from "./SubscribedCard";
 import { ScrollView, StatusBar, StyleSheet } from "react-native";
 import SubsFormCard from "./SubsFormCard";

@@ -1,16 +1,12 @@
 import React from "react";
-import NavBottom from "./navigations/NavBottom";
-import { StatusBar } from "react-native";
-import { theme } from "./constants/styles";
+import { StatusBar } from "expo-status-bar";
+import NavStack from "./navigations/NavStack";
 
 export default function App() {
   return (
     <>
-      <StatusBar
-        barStyle={"light-content"}
-        backgroundColor={theme["light"]?.colors?.primary}
-      />
-      <NavBottom />
+      <StatusBar style="light" translucent backgroundColor="transparent" />
+      <NavStack />
     </>
   );
 }
