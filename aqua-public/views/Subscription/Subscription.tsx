@@ -6,7 +6,7 @@ import SubsCard from "./SubscriptionCard";
 import SubscribedCard from "./SubscribedCard";
 import { ScrollView, StatusBar, StyleSheet } from "react-native";
 import SubsFormCard from "./SubsFormCard";
-import QualityAssuranceCard from "../QualityAssuranceModel/QualityAssuranceCard";
+import QualityAssuranceCard from "../QualityAssurance/QualityAssuranceCard";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../constants/styles";
 

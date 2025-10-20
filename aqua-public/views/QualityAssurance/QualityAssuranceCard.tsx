@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Info } from "lucide-react-native";
-import QualityAssuranceInfo from "../Models/QAIModel";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function QualityAssuranceCard(): React.ReactElement {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  // const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   return (
     <LinearGradient
@@ -15,38 +14,22 @@ export default function QualityAssuranceCard(): React.ReactElement {
       end={{ x: 1, y: 1 }}
       style={styles.container}
     >
-      {/* Icon Badge */}
       <View style={styles.infoContainer}>
         <View style={styles.iconBadge}>
           <MaterialIcons name="verified" size={28} color="#0077cc" />
         </View>
 
-        {/* Title */}
         <Text style={styles.headerText}>
           💧 AquaCare+ Product Quality & Assurance
         </Text>
       </View>
 
-      {/* Learn More Button */}
       <View style={styles.bottomRow}>
-        <TouchableOpacity
-          style={styles.infoBtn}
-          onPress={() => setModalVisible(true)}
-        >
+        <TouchableOpacity style={styles.infoBtn} onPress={() => {}}>
           <Info size={20} color="#000" />
           <Text style={styles.infoText}>Learn More</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Modal */}
-      <Modal
-        transparent
-        visible={modalVisible}
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <QualityAssuranceInfo />
-      </Modal>
     </LinearGradient>
   );
 }
@@ -103,3 +86,14 @@ const styles = StyleSheet.create({
     marginLeft: 4, // replace gap
   },
 });
+
+{
+  /* <Modal
+        transparent
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <QualityAssuranceInfo />
+      </Modal> */
+}

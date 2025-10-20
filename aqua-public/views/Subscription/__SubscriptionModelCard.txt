@@ -1,3 +1,4 @@
+import { CircleCheck } from "lucide-react-native";
 import React from "react";
 import {
   View,
@@ -16,7 +17,7 @@ interface SubscriptionModelCardProps {
   color?: string;
 }
 
-export function SubscriptionModelCard({
+export function SubsBaseCard({
   subsType,
   numberOfPremiumAccount,
   pricePerMonth,
@@ -25,73 +26,71 @@ export function SubscriptionModelCard({
   color = "#2196f3",
 }: SubscriptionModelCardProps) {
   return (
-    <View
-      style={{
-        backgroundColor: "#f4f9ff",
-        borderRadius: 16,
-        shadowColor: "#000",
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        elevation: 3,
-        marginVertical: 10,
-        padding: 20,
-      }}
-    >
-      {/* Header */}
-      <View style={{ marginBottom: 12 }}>
-        <Text style={{ fontSize: 18, fontWeight: "700", color }}>Premium</Text>
-        <Text style={{ fontSize: 22, fontWeight: "900" }}>{subsType}</Text>
-        <Text style={{ marginTop: 4, fontSize: 16 }}>
+    <View style={styles.baseContainer}>
+      <View style={styles.subContainer}>
+        <Text style={styles.textPremium}>Premium</Text>
+        <Text style={styles.textSubs}>{subsType}</Text>
+        <Text style={styles.textPricing}>
           ₹{pricePerMonth}/month ({priceAYear}/year)
         </Text>
-        <Text style={{ fontSize: 13, color: "#555" }}>
-          + ₹{processingFee} processing fee
-        </Text>
+        <Text style={styles.textSmall}>+ ₹{processingFee} processing fee</Text>
       </View>
 
       {/* Benefits */}
-      <View style={{ marginBottom: 12 }}>
-        <Text style={{ fontWeight: "600" }}>
+      <View style={styles.subContainer}>
+        <Text style={styles.textList}>
           {numberOfPremiumAccount} Premium Account
         </Text>
 
-        <Text style={{ marginTop: 4 }}>
+        <Text style={styles.textList}>
           {numberOfPremiumAccount} Container Access
         </Text>
-        <Text style={{ marginTop: 4 }}>20% OFF on every refill</Text>
-        <Text style={{ marginTop: 4 }}>No Container Deposits / Rent</Text>
-        <Text style={{ marginTop: 4 }}>Basic Priority Support</Text>
+        <Text style={styles.textList}>20% OFF on every refill</Text>
+        <Text style={styles.textList}>No Container Deposits / Rent</Text>
+        <Text style={styles.textList}>Basic Priority Support</Text>
       </View>
 
-      {/* Subscribe Button */}
-      <TouchableOpacity
-        style={{
-          backgroundColor: color,
-          borderRadius: 10,
-          paddingVertical: 10,
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ color: "#fff", fontWeight: "600" }}>Subscribe</Text>
+      <View style={styles.billingContainer}>
+        {["Monthly", "Yearly"].map((cycle) => (
+          <TouchableOpacity
+            key={cycle}
+            style={[
+              styles.billingButton,
+              billingCycle === cycle && styles.billingButtonActive,
+            ]}
+            onPress={() => setBillingCycle(cycle as "Monthly" | "Yearly")}
+          >
+            <Text
+              style={[
+                styles.billingText,
+                billingCycle === cycle && styles.billingTextActive,
+              ]}
+            >
+              {cycle}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Text style={styles.textButton}>Subscribe</Text>
       </TouchableOpacity>
 
-      {/* Terms & Info */}
-      <View style={{ marginTop: 14 }}>
-        <Text style={{ fontSize: 12, color: "#444", lineHeight: 18 }}>
-          All jars are property of AquaCare+ vendors and are barcoded for
+      <View style={styles.subContainer}>
+        <Text style={styles.textSmall}>
+          All jars are property of AquaCare+ vendors and securly barcoded for
           tracking.
         </Text>
 
-        <Text style={{ marginTop: 8, fontSize: 12, fontWeight: "700" }}>
-          If a customer damages a jar:
-        </Text>
+        <Text style={styles.textTitle}>If a customer damages a jar:</Text>
         {[
           "Replacement charge: ₹200 per jar",
           "Continuation option: pay ₹200 to continue",
           "Cancellation option: pay ₹80 maintenance deduction",
         ].map((item, idx) => (
           <Text key={idx} style={{ fontSize: 12 }}>
-            • {item}
+            <CircleCheck size={10} />
+            {item}
           </Text>
         ))}
 
@@ -266,10 +265,29 @@ export function CustomSubscription() {
 }
 
 export const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
+  baseContainer: {
+    backgroundColor: "#f4f9ff",
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginVertical: 10,
     padding: 20,
+  },
+  subContainer: { marginBottom: 12 },
+  textPremium: { fontSize: 18, fontWeight: "700", color: "#2196f3" },
+  textSubs: { fontSize: 22, fontWeight: "900" },
+  textPricing: { marginTop: 4, fontSize: 16 },
+  textSmall: { fontSize: 13, color: "#555", lineHeight: 18 },
+  textList: { marginTop: 4 },
+  textButton: { color: "#fff", fontWeight: "600" },
+  textTitle: { marginTop: 8, fontSize: 12, fontWeight: "700" },
+  buttonContainer: {
+    backgroundColor: "#2196f3",
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: "center",
   },
 
   // Counter
