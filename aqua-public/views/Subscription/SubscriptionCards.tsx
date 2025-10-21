@@ -9,7 +9,7 @@ import {
 import { CircleCheck } from "lucide-react-native";
 
 // ---------- Smaller UI Components ----------
-const SubscriptionCardHeader = ({
+export const SubscriptionCardHeader = ({
   title,
   subtitle,
   desc,
@@ -25,7 +25,7 @@ const SubscriptionCardHeader = ({
   </View>
 );
 
-const BenefitsList = ({ items }: { items?: string[] }) => (
+export const BenefitsList = ({ items }: { items?: string[] }) => (
   <View style={styles.benefitsContainer}>
     {items &&
       items.map((item, idx) => (
@@ -37,7 +37,7 @@ const BenefitsList = ({ items }: { items?: string[] }) => (
   </View>
 );
 
-const BillingToggle = ({
+export const BillingToggle = ({
   billingType,
   setBillingType,
 }: {
@@ -80,7 +80,7 @@ const BillingToggle = ({
   </View>
 );
 
-const Counter = ({
+export const Counter = ({
   counter,
   setCounter,
 }: {
@@ -108,7 +108,13 @@ const Counter = ({
   </View>
 );
 
-const NotesList = ({ title, notes }: { title?: string; notes?: string[] }) => (
+export const NotesList = ({
+  title,
+  notes,
+}: {
+  title?: string;
+  notes?: string[];
+}) => (
   <View style={styles.notesContainer}>
     <Text style={styles.notesTitle}>{title}</Text>
     {notes &&
@@ -120,7 +126,7 @@ const NotesList = ({ title, notes }: { title?: string; notes?: string[] }) => (
   </View>
 );
 
-const SubscribeButton = ({ label }: { label?: string }) => (
+export const SubscribeButton = ({ label }: { label?: string }) => (
   <TouchableOpacity style={styles.subscribeButton}>
     <Text style={styles.subscribeButtonText}>{label}</Text>
   </TouchableOpacity>

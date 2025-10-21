@@ -2,6 +2,7 @@ import React from "react";
 import Subscription from "../views/Subscription/Subscription";
 import { ScrollView, StyleSheet } from "react-native";
 import QualityAssuranceCard from "../views/QualityAssurance/QualityAssuranceCard";
+import { NormalBookingCard } from "../views/bookingCards/NormalBookingCard";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
     >
       <QualityAssuranceCard />
       <Subscription />
+      <NormalBookingCard />
     </ScrollView>
   );
 }

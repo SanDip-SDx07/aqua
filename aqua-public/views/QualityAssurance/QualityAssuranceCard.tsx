@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 2,
     overflow: "hidden",
-    marginBottom: 10,
+    marginBottom: 15,
+    marginTop: 20,
   },
   infoContainer: {
     flexDirection: "row",

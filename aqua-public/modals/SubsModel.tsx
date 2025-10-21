@@ -3,7 +3,6 @@ import {
   SubsBaseCard,
   CustomBaseCard,
 } from "../views/Subscription/SubscriptionCards";
-import { theme } from "../constants/styles";
 
 export function IndividualSubscription() {
   return (
