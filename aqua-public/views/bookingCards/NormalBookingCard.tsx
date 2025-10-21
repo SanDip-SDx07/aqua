@@ -21,6 +21,12 @@ export function NormalBookingCard() {
         end={{ x: 1, y: 1 }}
         style={styles.contentContainer}
       >
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Flexiable Booking</Text>
+          {/* <Text style={styles.headerSubtitle}>{subtitle}</Text> */}
+          {/* {desc && <Text style={styles.headerDesc}>{desc}</Text>} */}
+        </View>
+
         <Counter counter={counter} setCounter={setCounter} />
 
         <View style={styles.totalContainer}>
@@ -60,12 +66,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   contentContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
     padding: 20,
-    alignItems: "center",
-    paddingBottom: 10,
-    height: "auto",
   },
   imageOverlay: {
     position: "absolute",
