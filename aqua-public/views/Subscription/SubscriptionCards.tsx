@@ -37,13 +37,45 @@ const BenefitsList = ({ items }: { items?: string[] }) => (
   </View>
 );
 
-const BillingToggle = () => (
+const BillingToggle = ({
+  billingType,
+  setBillingType,
+}: {
+  billingType: "monthly" | "yearly";
+  setBillingType: (key: "monthly" | "yearly") => void;
+}) => (
   <View style={styles.billingContainer}>
-    <TouchableOpacity style={styles.billingButton}>
-      <Text style={styles.billingText}>Monthly</Text>
+    <TouchableOpacity
+      style={[
+        styles.billingButton,
+        billingType === "monthly" && { backgroundColor: "#007AFF" },
+      ]}
+      onPress={() => setBillingType("monthly")}
+    >
+      <Text
+        style={[
+          styles.billingText,
+          billingType === "monthly" && { color: "#fff" },
+        ]}
+      >
+        Monthly
+      </Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.billingButton}>
-      <Text style={styles.billingText}>Yearly</Text>
+    <TouchableOpacity
+      style={[
+        styles.billingButton,
+        billingType === "yearly" && { backgroundColor: "#007AFF" },
+      ]}
+      onPress={() => setBillingType("yearly")}
+    >
+      <Text
+        style={[
+          styles.billingText,
+          billingType === "yearly" && { color: "#fff" },
+        ]}
+      >
+        Yearly
+      </Text>
     </TouchableOpacity>
   </View>
 );
@@ -66,8 +98,7 @@ const NotesList = ({ title, notes }: { title?: string; notes?: string[] }) => (
     {notes &&
       notes.map((note, idx) => (
         <View key={idx} style={styles.notesItem}>
-          <CircleCheck size={10} />
-          <Text>{note}</Text>
+          <Text>• {note}</Text>
         </View>
       ))}
   </View>
@@ -92,93 +123,127 @@ export const SubsBaseCard = ({
   pricePerMonth: number;
   priceAYear: number;
   processingFee: number;
-}) => (
-  <View style={styles.cardContainer}>
-    <SubscriptionCardHeader title="Premium" subtitle={subsType} />
+}) => {
+  const [billingType, setBillingType] = React.useState<"monthly" | "yearly">(
+    "monthly"
+  );
+  return (
+    <View style={styles.cardContainer}>
+      <SubscriptionCardHeader title="Premium" subtitle={subsType} />
 
-    <Text style={styles.pricingText}>
-      ₹{pricePerMonth}/month (₹{priceAYear}/year)
-    </Text>
-    <Text style={styles.processingText}>+ ₹{processingFee} processing fee</Text>
+      <Text style={styles.pricingText}>
+        ₹{pricePerMonth}/month (₹{priceAYear}/year)
+      </Text>
+      <Text style={styles.processingText}>
+        + ₹{processingFee} processing fee
+      </Text>
 
-    <BenefitsList
-      items={[
-        `${numberOfPremiumAccount} Premium Account`,
-        `${numberOfPremiumAccount} Container Access`,
-        "20% OFF on every refill",
-        "No Container Deposits / Rent",
-        "Basic Priority Support",
-      ]}
-    />
+      <BenefitsList
+        items={[
+          `${numberOfPremiumAccount} Premium Account`,
+          `${numberOfPremiumAccount} Container Access`,
+          "20% OFF on every refill",
+          "No Container Deposits / Rent",
+          "Basic Priority Support",
+        ]}
+      />
 
-    <BillingToggle />
-    <SubscribeButton label="Subscribe" />
+      <BillingToggle
+        billingType={billingType}
+        setBillingType={setBillingType}
+      />
+      <SubscribeButton label="Subscribe" />
 
-    <View style={styles.totalContainer}>
-      <Text style={styles.totalLabel}>Total</Text>
-      <Text style={styles.totalValue}>₹{"totalAmount"}</Text>
+      <View style={styles.totalContainer}>
+        <Text style={styles.totalLabel}>Total</Text>
+        <Text style={styles.totalValue}>
+          ₹
+          {billingType === "monthly"
+            ? numberOfPremiumAccount * pricePerMonth + processingFee
+            : priceAYear + processingFee}
+        </Text>
+      </View>
+
+      <Text style={styles.deliveryNote}>
+        All jars are property of AquaCare+ vendors and securly barcoded for
+        tracking.
+      </Text>
+
+      <NotesList
+        title="If a customer damages a jar:"
+        notes={[
+          "Replacement charge: ₹200 per jar",
+          "Continuation option: pay ₹200 to continue",
+          "Cancellation option: pay ₹80 maintenance deduction",
+        ]}
+      />
+
+      <Text style={styles.deliveryNote}>
+        Delivery charges may apply based on distance or route optimization.
+      </Text>
     </View>
+  );
+};
 
-    <NotesList
-      title="If a customer damages a jar:"
-      notes={[
-        "Replacement charge: ₹200 per jar",
-        "Continuation option: pay ₹200 to continue",
-        "Cancellation option: pay ₹80 maintenance deduction",
-      ]}
-    />
+export const CustomBaseCard = () => {
+  const [billingType, setBillingType] = React.useState<"monthly" | "yearly">(
+    "monthly"
+  );
 
-    <Text style={styles.deliveryNote}>
-      Delivery charges may apply based on distance or route optimization.
-    </Text>
-  </View>
-);
+  return (
+    <View style={styles.cardContainer}>
+      <SubscriptionCardHeader
+        title="Premium+"
+        subtitle="Custom Plan"
+        desc="Flexible pricing — based on your usage"
+      />
 
-export const CustomBaseCard = () => (
-  <View style={styles.cardContainer}>
-    <SubscriptionCardHeader
-      title="Premium+"
-      subtitle="Custom Plan"
-      desc="Flexible pricing — based on your usage"
-    />
+      <BenefitsList
+        items={[
+          "Set number of premium accounts (1–10+)",
+          "Flexible container count (1–20+)",
+          "Pay only for used refills",
+          "Up to 30% off on volume-based plans",
+          "Add-on: Smart Jar Tracking & Analytics",
+        ]}
+      />
 
-    <BenefitsList
-      items={[
-        "Set number of premium accounts (1–10+)",
-        "Flexible container count (1–20+)",
-        "Pay only for used refills",
-        "Up to 30% off on volume-based plans",
-        "Add-on: Smart Jar Tracking & Analytics",
-      ]}
-    />
+      <Text style={styles.pricingText}>₹10 / month (based on your plan)</Text>
+      <Text style={styles.processingText}>+ ₹20 standard processing fee</Text>
 
-    <Text style={styles.pricingText}>₹10 / month (based on your plan)</Text>
-    <Text style={styles.processingText}>+ ₹20 standard processing fee</Text>
+      <Counter />
+      <BillingToggle
+        billingType={billingType}
+        setBillingType={setBillingType}
+      />
 
-    <Counter />
-    <BillingToggle />
+      <View style={styles.totalContainer}>
+        <Text style={styles.totalLabel}>Total</Text>
+        <Text style={styles.totalValue}>₹{"totalAmount"}</Text>
+      </View>
 
-    <View style={styles.totalContainer}>
-      <Text style={styles.totalLabel}>Total</Text>
-      <Text style={styles.totalValue}>₹{"totalAmount"}</Text>
+      <SubscribeButton label="Customize & Subscribe" />
+
+      <Text style={styles.deliveryNote}>
+        All jars are property of AquaCare+ vendors and securly barcoded for
+        tracking.
+      </Text>
+
+      <NotesList
+        title="If a customer damages a jar:"
+        notes={[
+          "Replacement charge: ₹200 per jar",
+          "Continuation option: pay ₹200 to continue",
+          "Cancellation option: pay ₹80 maintenance deduction",
+        ]}
+      />
+
+      <Text style={styles.deliveryNote}>
+        Delivery charges may vary based on distance or route optimization.
+      </Text>
     </View>
-
-    <SubscribeButton label="Customize & Subscribe" />
-
-    <NotesList
-      title="If a customer damages a jar:"
-      notes={[
-        "Replacement charge: ₹200 per jar",
-        "Continuation option: pay ₹200 to continue",
-        "Cancellation option: pay ₹80 maintenance deduction",
-      ]}
-    />
-
-    <Text style={styles.deliveryNote}>
-      Delivery charges may vary based on distance or route optimization.
-    </Text>
-  </View>
-);
+  );
+};
 
 // ---------- Styles ----------
 const styles = StyleSheet.create({
@@ -246,13 +311,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     backgroundColor: "#fff",
   },
-  notesContainer: { marginTop: 10 },
-  notesTitle: { marginTop: 8, fontSize: 12, fontWeight: "700" },
+  notesContainer: { marginTop: 2 },
+  notesTitle: { marginTop: 4, fontSize: 12, fontWeight: "700" },
   notesItem: {
-    fontSize: 12,
-    flexDirection: "row",
-    gap: 4,
-    alignItems: "center",
+    fontSize: 15,
+    marginTop: 4,
   },
   subscribeButton: {
     backgroundColor: "#007aff",
