@@ -21,8 +21,8 @@ export function StandardSubscription() {
     <SubsBaseCard
       subsType="Standard"
       numberOfPremiumAccount={2}
-      pricePerMonth={20}
-      priceAYear={200}
+      pricePerMonth={10}
+      priceAYear={100}
       processingFee={20}
     />
   );
@@ -32,8 +32,8 @@ export function FamilySubscription() {
     <SubsBaseCard
       subsType="Family"
       numberOfPremiumAccount={3}
-      pricePerMonth={30}
-      priceAYear={300}
+      pricePerMonth={10}
+      priceAYear={100}
       processingFee={20}
     />
   );
@@ -43,8 +43,8 @@ export function EnterpriseSubscription() {
     <SubsBaseCard
       subsType="Enterprise"
       numberOfPremiumAccount={6}
-      pricePerMonth={60}
-      priceAYear={600}
+      pricePerMonth={10}
+      priceAYear={100}
       processingFee={20}
     />
   );

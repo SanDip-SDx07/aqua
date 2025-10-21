@@ -80,13 +80,29 @@ const BillingToggle = ({
   </View>
 );
 
-const Counter = () => (
+const Counter = ({
+  counter,
+  setCounter,
+}: {
+  counter: number;
+  setCounter: (key: number | any) => void;
+}) => (
   <View style={styles.counterContainer}>
-    <TouchableOpacity style={styles.counterButton}>
+    <TouchableOpacity
+      style={styles.counterButton}
+      onPress={() => setCounter((prev: number) => (prev > 1 ? prev - 1 : 1))}
+    >
       <Text style={styles.counterSymbol}>−</Text>
     </TouchableOpacity>
-    <TextInput value="1" editable={false} style={styles.counterInput} />
-    <TouchableOpacity style={styles.counterButton}>
+    <TextInput
+      value={String(counter)}
+      editable={false}
+      style={styles.counterInput}
+    />
+    <TouchableOpacity
+      style={styles.counterButton}
+      onPress={() => setCounter((prev: number) => (prev < 30 ? prev + 1 : 30))}
+    >
       <Text style={styles.counterSymbol}>+</Text>
     </TouchableOpacity>
   </View>
@@ -160,7 +176,7 @@ export const SubsBaseCard = ({
           ₹
           {billingType === "monthly"
             ? numberOfPremiumAccount * pricePerMonth + processingFee
-            : priceAYear + processingFee}
+            : numberOfPremiumAccount * priceAYear + processingFee}
         </Text>
       </View>
 
@@ -185,10 +201,19 @@ export const SubsBaseCard = ({
   );
 };
 
-export const CustomBaseCard = () => {
+export const CustomBaseCard = ({
+  pricePerMonth = 10,
+  priceAYear = 100,
+  processingFee = 20,
+}: {
+  pricePerMonth?: number;
+  priceAYear?: number;
+  processingFee?: number;
+}) => {
   const [billingType, setBillingType] = React.useState<"monthly" | "yearly">(
     "monthly"
   );
+  const [counter, setCounter] = React.useState<number>(1 as number);
 
   return (
     <View style={styles.cardContainer}>
@@ -208,10 +233,14 @@ export const CustomBaseCard = () => {
         ]}
       />
 
-      <Text style={styles.pricingText}>₹10 / month (based on your plan)</Text>
-      <Text style={styles.processingText}>+ ₹20 standard processing fee</Text>
+      <Text style={styles.pricingText}>
+        ₹{counter * 10}/ month (based on your plan)
+      </Text>
+      <Text style={styles.processingText}>
+        + ₹{processingFee} standard processing fee
+      </Text>
 
-      <Counter />
+      <Counter counter={counter} setCounter={setCounter} />
       <BillingToggle
         billingType={billingType}
         setBillingType={setBillingType}
@@ -219,7 +248,12 @@ export const CustomBaseCard = () => {
 
       <View style={styles.totalContainer}>
         <Text style={styles.totalLabel}>Total</Text>
-        <Text style={styles.totalValue}>₹{"totalAmount"}</Text>
+        <Text style={styles.totalValue}>
+          ₹
+          {billingType === "monthly"
+            ? counter * pricePerMonth + processingFee
+            : counter * priceAYear + processingFee}
+        </Text>
       </View>
 
       <SubscribeButton label="Customize & Subscribe" />
