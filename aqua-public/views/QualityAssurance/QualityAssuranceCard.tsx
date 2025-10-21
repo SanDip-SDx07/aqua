@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     elevation: 2,
     overflow: "hidden",
     marginBottom: 15,
-    marginTop: 20,
   },
   infoContainer: {
     flexDirection: "row",

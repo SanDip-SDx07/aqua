@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f6f8fb",
-    // marginTop: 20,
+    marginTop: 35,
   },
   contentContainer: {
     padding: 16,

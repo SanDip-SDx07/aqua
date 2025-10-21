@@ -83,13 +83,16 @@ export const BillingToggle = ({
 export const Counter = ({
   counter,
   setCounter,
+  color,
 }: {
   counter: number;
   setCounter: (key: number | any) => void;
+  bgColor?: string;
+  color?: string;
 }) => (
   <View style={styles.counterContainer}>
     <TouchableOpacity
-      style={styles.counterButton}
+      style={[styles.counterButton, color && { backgroundColor: color }]}
       onPress={() => setCounter((prev: number) => (prev > 1 ? prev - 1 : 1))}
     >
       <Text style={styles.counterSymbol}>−</Text>
@@ -100,7 +103,7 @@ export const Counter = ({
       style={styles.counterInput}
     />
     <TouchableOpacity
-      style={styles.counterButton}
+      style={[styles.counterButton, color && { backgroundColor: color }]}
       onPress={() => setCounter((prev: number) => (prev < 30 ? prev + 1 : 30))}
     >
       <Text style={styles.counterSymbol}>+</Text>
@@ -252,6 +255,8 @@ export const CustomBaseCard = ({
         setBillingType={setBillingType}
       />
 
+      <SubscribeButton label="Customize & Subscribe" />
+
       <View style={styles.totalContainer}>
         <Text style={styles.totalLabel}>Total</Text>
         <Text style={styles.totalValue}>
@@ -261,8 +266,6 @@ export const CustomBaseCard = ({
             : counter * priceAYear + processingFee}
         </Text>
       </View>
-
-      <SubscribeButton label="Customize & Subscribe" />
 
       <Text style={styles.deliveryNote}>
         All jars are property of AquaCare+ vendors and securly barcoded for
@@ -294,7 +297,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    marginVertical: 10,
+    marginBottom: 20,
     padding: 20,
   },
   headerContainer: { marginBottom: 10 },
@@ -315,7 +318,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#d8e6fc",
     borderRadius: 25,
     overflow: "hidden",
-    marginBottom: 20,
+    marginVertical: 10,
   },
   billingButton: {
     flex: 1,
@@ -328,7 +331,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginVertical: 10,
   },
   counterButton: {
     width: 45,

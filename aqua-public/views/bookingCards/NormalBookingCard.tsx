@@ -1,11 +1,27 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { Counter, NotesList } from "../Subscription/SubscriptionCards";
+import {
+  BenefitsList,
+  Counter,
+  NotesList,
+  SubscriptionCardHeader,
+} from "../Subscription/SubscriptionCards";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
-export function NormalBookingCard() {
+export function NormalBookingCard({
+  distance = 2,
+  deliveryCharge = 5,
+  containerRentPerDay = 5,
+  refillPrice = 42,
+}: {
+  distance?: number;
+  deliveryCharge?: number;
+  containerRentPerDay?: number;
+  refillPrice?: number;
+}) {
   const [counter, setCounter] = React.useState<number>(1 as number);
-  const totalBillingAmount = counter * 10 + 20;
+  const calcDeliveryCharge = distance > 1 ? (distance - 1) * deliveryCharge : 0;
+  const totalBillingAmount = counter * refillPrice + calcDeliveryCharge;
 
   return (
     <View style={styles.cardContainer}>
@@ -16,18 +32,26 @@ export function NormalBookingCard() {
       />
 
       <LinearGradient
-        colors={["#ffffff09", "#dbdbdbff"]}
+        colors={["#f0f8ffff", "#cfe7fd67", "#cfe7fdff"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.contentContainer}
       >
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Flexiable Booking</Text>
-          {/* <Text style={styles.headerSubtitle}>{subtitle}</Text> */}
-          {/* {desc && <Text style={styles.headerDesc}>{desc}</Text>} */}
-        </View>
+        <SubscriptionCardHeader
+          title="Regular"
+          subtitle="Flexiable Booking"
+          desc="Flexible pricing — based on your usage"
+        />
 
-        <Counter counter={counter} setCounter={setCounter} />
+        <BenefitsList
+          items={[
+            "Flexible container count (1–20+)",
+            `Container Rent ₹ ${containerRentPerDay}/day (1 day off)`,
+            "0 Processing Fee",
+          ]}
+        />
+
+        <Counter counter={counter} setCounter={setCounter} color="#fff" />
 
         <View style={styles.totalContainer}>
           <Text style={styles.totalLabel}>Total</Text>
@@ -38,6 +62,11 @@ export function NormalBookingCard() {
           <Text style={styles.bookButtonText}>Book</Text>
         </Pressable>
 
+        <Text style={styles.deliveryNote}>
+          All jars are property of AquaCare+ vendors and securly barcoded for
+          tracking.
+        </Text>
+
         <NotesList
           title="If a customer damages a jar:"
           notes={[
@@ -46,6 +75,10 @@ export function NormalBookingCard() {
             "Cancellation option: pay ₹80 maintenance deduction",
           ]}
         />
+
+        <Text style={styles.deliveryNote}>
+          Delivery charges may vary based on distance or route optimization.
+        </Text>
       </LinearGradient>
     </View>
   );
@@ -74,6 +107,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     height: "100%",
+    opacity: 0.3,
   },
   headerContainer: { marginBottom: 10 },
   headerTitle: { fontSize: 18, fontWeight: "700", color: "#007aff" },
