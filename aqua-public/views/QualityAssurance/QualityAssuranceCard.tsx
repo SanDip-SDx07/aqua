@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   iconBadge: {
     width: 50,

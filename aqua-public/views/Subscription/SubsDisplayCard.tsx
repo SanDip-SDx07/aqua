@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 6,
     elevation: 3,
+    marginVertical: 10,
   },
   iconContainer: {
     width: 50,

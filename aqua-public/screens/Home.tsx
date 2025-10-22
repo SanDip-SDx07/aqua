@@ -1,20 +1,30 @@
 import React from "react";
-import Subscription from "../views/Subscription/Subscription";
+import SubsDisplayCard from "../views/Subscription/SubsDisplayCard";
 import { ScrollView, StyleSheet } from "react-native";
 import QualityAssuranceCard from "../views/QualityAssurance/QualityAssuranceCard";
 import { NormalBookingCard } from "../views/bookingCards/NormalBookingCard";
 import SubscribedCard from "../views/Subscription/SubscribedCard";
+import HomeContextProvider from "./HomeContext";
 
-export default function Home() {
+export default function HomeMain({ children }: { children?: React.ReactNode }) {
+  return (
+    <HomeContextProvider>
+      <Home />
+      {children}
+    </HomeContextProvider>
+  );
+}
+
+export function Home() {
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
       <QualityAssuranceCard />
-      <Subscription />
-      <NormalBookingCard />
+      <SubsDisplayCard />
       <SubscribedCard />
+      <NormalBookingCard />
     </ScrollView>
   );
 }
