@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Home, ClipboardList, Wallet, Bell, User } from "lucide-react-native";
 
 import HomeScreen from "../screens/Home";
-import OrdersScreen from "../screens/Orders";
+import OrdersScreen from "../screens/Orders/Orders";
 import WalletScreen from "../screens/Wallets";
 import NotificationScreen from "../screens/Notification";
 import ProfileScreen from "../screens/Profile";

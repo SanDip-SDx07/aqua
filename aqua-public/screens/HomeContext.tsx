@@ -34,9 +34,7 @@ export default function HomeContextProvider({
 export function useHomeState() {
   const context = React.useContext(HomeContext);
   if (!context)
-    throw new Error(
-      "useHomeState function must be called inside the HomeContext"
-    );
+    throw new Error("useHomeState hook must be called inside the HomeContext");
   return context;
 }
 
