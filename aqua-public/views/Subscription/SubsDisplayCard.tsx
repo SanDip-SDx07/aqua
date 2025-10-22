@@ -17,35 +17,33 @@ export default function SubsDisplayCard() {
 
   return (
     <LinearGradient
-      colors={["#f0f8ff", "#cfe7fdff"]}
+      colors={["#f0f8ff", "#cfe7fd"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.card}
     >
-      <View style={styles.topRow}>
-        <View style={styles.iconContainer}>
-          <Droplet size={50} color="#097bfdff" />
-        </View>
-        <Text style={styles.priceBadge}>
-          AquaCare+ Exclusive Service Subscription
-        </Text>
+      <View style={styles.iconContainer}>
+        <Droplet size={40} color="#0077cc" />
       </View>
 
-      <View style={styles.bottomRow}>
-        <TouchableOpacity
-          style={styles.subscribeBtn}
-          onPress={() => navigation.push("PremiumModal")}
-        >
-          <Text style={styles.subscribeText}>Explore Premium</Text>
-        </TouchableOpacity>
+      <View style={styles.contentContainer}>
+        <Text style={styles.headerText}>AquaCare+ Exclusive Service</Text>
 
-        <TouchableOpacity
-          style={styles.infoBtn}
-          onPress={() => navigation.push("TermsModal")}
-        >
-          <Info size={24} color="#000" />
-          <Text style={styles.infoText}>Learn More</Text>
-        </TouchableOpacity>
+        <View style={styles.bottomRow}>
+          <TouchableOpacity
+            style={styles.subscribeBtn}
+            onPress={() => navigation.push("PremiumModal")}
+          >
+            <Text style={styles.subscribeText}>Explore Premium</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.infoButton}
+            onPress={() => navigation.push("TermsModal")}
+          >
+            <Info size={18} color="#0077cc" />
+          </TouchableOpacity>
+        </View>
       </View>
     </LinearGradient>
   );
@@ -53,69 +51,74 @@ export default function SubsDisplayCard() {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 14,
     padding: 16,
+    backgroundColor: "#f0f8ff",
     shadowColor: "#000",
     shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-    width: "100%",
-  },
-  textGroup: { flex: 1, flexDirection: "row", gap: 8 },
-  topRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
+    shadowRadius: 6,
+    elevation: 3,
   },
   iconContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#e6f3ff",
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 12,
-    alignItems: "stretch",
   },
-  featuresContainer: {
+  contentContainer: {
     flex: 1,
-    gap: 7,
   },
-  header: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  feature: {
-    fontSize: 14,
-    marginBottom: 4,
-    color: "#000",
-  },
-  priceBadge: {
-    width: "100%",
-    flex: 1,
-    fontWeight: "700",
+  headerText: {
     fontSize: 16,
+    fontWeight: "700",
     color: "#000",
+    marginBottom: 10,
   },
   bottomRow: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 16,
+    gap: 8,
   },
   subscribeBtn: {
-    backgroundColor: "#000",
+    flex: 1,
+    backgroundColor: "#007aff",
+    borderRadius: 10,
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 6,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 3,
   },
   subscribeText: {
     color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
+    fontWeight: "600",
+    fontSize: 15,
   },
-  infoBtn: {
-    flexDirection: "row",
+  infoButton: {
+    width: 42,
+    height: 42,
     alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    backgroundColor: "#f2f2f2",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
   infoText: {
-    color: "#000",
-    marginLeft: 4,
+    fontSize: 14,
+    color: "#0077cc",
     fontWeight: "500",
+    marginLeft: 4,
   },
 });
 

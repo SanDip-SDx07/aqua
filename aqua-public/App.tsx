@@ -5,7 +5,7 @@ import NavStack from "./navigations/NavStack";
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" translucent backgroundColor="transparent" />
+      <StatusBar style="auto" translucent backgroundColor="#7cbbfdff" />
       <NavStack />
     </>
   );

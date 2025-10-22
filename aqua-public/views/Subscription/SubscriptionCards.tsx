@@ -135,6 +135,14 @@ export const SubscribeButton = ({ label }: { label?: string }) => (
   </TouchableOpacity>
 );
 
+export function Water20LLabel(): React.ReactElement {
+  return (
+    <View style={styles.labelContainer}>
+      <Text style={styles.labelText}>20 L</Text>
+    </View>
+  );
+}
+
 // ---------- Main UI Cards ----------
 export const SubsBaseCard = ({
   subsType,
@@ -154,6 +162,8 @@ export const SubsBaseCard = ({
   );
   return (
     <View style={styles.cardContainer}>
+      <Water20LLabel />
+
       <SubscriptionCardHeader title="Premium" subtitle={subsType} />
 
       <Text style={styles.pricingText}>
@@ -226,6 +236,8 @@ export const CustomBaseCard = ({
 
   return (
     <View style={styles.cardContainer}>
+      <Water20LLabel />
+
       <SubscriptionCardHeader
         title="Premium+"
         subtitle="Custom Plan"
@@ -379,4 +391,17 @@ const styles = StyleSheet.create({
   totalLabel: { fontSize: 16, color: "#333", fontWeight: "600" },
   totalValue: { fontSize: 20, fontWeight: "800", color: "#007AFF" },
   deliveryNote: { marginTop: 8, fontSize: 12 },
+  labelContainer: {
+    position: "absolute",
+    top: 15,
+    right: 10,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+  },
+  labelText: {
+    color: "#007AFF",
+    fontWeight: "700",
+    fontSize: 20,
+  },
 });
