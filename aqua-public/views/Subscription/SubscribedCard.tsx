@@ -2,8 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { formatDistanceStrict } from "date-fns";
-import { Droplet, CircleCheck, Percent } from "lucide-react-native"; // example icon package
 import {
+  Droplet,
+  CircleCheck,
+  Percent,
+  Calendar,
+  PiggyBank,
+} from "lucide-react-native"; // example icon package
+import {
+  Counter,
   SubscriptionCardHeader,
   Water20LLabel,
 } from "../Subscription/SubscriptionCards";
@@ -26,7 +33,7 @@ interface SubscribedCardProps {
   onCancel?: () => void;
 }
 
-const SubscribedCard: React.FC<SubscribedCardProps> = ({
+export default function SubscribedCard({
   activePlan = "Individual",
   activationDate = new Date("2025-10-18"),
   expiryDate = new Date("2026-10-18"),
@@ -41,11 +48,12 @@ const SubscribedCard: React.FC<SubscribedCardProps> = ({
   onBook = () => console.log("Book clicked"),
   onUpgrade = () => console.log("Upgrade clicked"),
   onCancel = () => console.log("Cancel clicked"),
-}) => {
+}: SubscribedCardProps) {
   // ✅ Calculate days left safely
   const daysLeft = formatDistanceStrict(expiryDate, activationDate, {
     unit: "day",
   });
+  const [counter, setCounter] = React.useState<number>(1);
 
   return (
     <LinearGradient
@@ -66,36 +74,56 @@ const SubscribedCard: React.FC<SubscribedCardProps> = ({
       {/* Perks / Features */}
       <View style={styles.perksRow}>
         <View style={styles.perkContainer}>
-          <Droplet size={20} color="#007bff" />
+          <Droplet size={30} color="#007bff" />
           <Text style={styles.perk}>Hygiene {hygieneRate}</Text>
         </View>
         <View style={styles.perkContainer}>
-          <CircleCheck size={20} color="#28a745" />
+          <CircleCheck size={30} color="#28a745" />
           <Text style={styles.perk}>
             {numberOfSubscription} Container Access
           </Text>
         </View>
         <View style={styles.perkContainer}>
-          <Percent size={20} color="#ffc107" />
+          <Percent size={30} color="#ffc107" />
           <Text style={styles.perk}>20% off refill</Text>
         </View>
       </View>
 
       {/* Price Section */}
       <View style={styles.priceSection}>
-        <Text style={styles.marketPrice}>Market Price: ₹{marketPrice}</Text>
-        <Text style={styles.regularPrice}>Regular Price: ₹{regularPrice}</Text>
-        <Text style={styles.yourPrice}>Your Price: ₹{yourPrice}</Text>
+        <View style={styles.priceBox}>
+          <Text style={styles.priceValueStrike}>₹{marketPrice}</Text>
+          <Text style={styles.priceLabel}>Market Price</Text>
+        </View>
+
+        <View style={[styles.priceBox, styles.priceBoxCenter]}>
+          <Text style={styles.priceValueHighlight}>₹{yourPrice}</Text>
+          <Text style={styles.priceLabel}>Your Price</Text>
+        </View>
+
+        <View style={styles.priceBox}>
+          <Text style={styles.priceValue}>₹{regularPrice}</Text>
+          <Text style={styles.priceLabel}>Regular Price</Text>
+        </View>
       </View>
+
+      <Counter counter={counter} setCounter={setCounter} />
 
       {/* Stats Section */}
       <View style={styles.statsRow}>
-        <Text style={[styles.stat, styles.textLeft]}>
-          📅 Total Orders: {totalOrders}
-        </Text>
-        <Text style={[styles.stat, styles.textRight]}>
-          💰 Total Savings: ₹{totalSavings}
-        </Text>
+        <View style={styles.statBox}>
+          <Calendar size={20} />
+          <Text style={[styles.stat, styles.textLeft]}>
+            Total Orders: {totalOrders}
+          </Text>
+        </View>
+
+        <View style={styles.statBoxRight}>
+          <PiggyBank size={20} />
+          <Text style={[styles.stat, styles.textRight]}>
+            Total Savings: ₹{totalSavings}
+          </Text>
+        </View>
       </View>
 
       {/* Action Buttons */}
@@ -118,9 +146,7 @@ const SubscribedCard: React.FC<SubscribedCardProps> = ({
       </View>
     </LinearGradient>
   );
-};
-
-export default SubscribedCard;
+}
 
 // ✅ Styles
 const styles = StyleSheet.create({
@@ -165,35 +191,64 @@ const styles = StyleSheet.create({
   },
 
   priceSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     marginBottom: 16,
+    width: "100%",
+    paddingHorizontal: 10,
   },
-  marketPrice: {
-    fontSize: 13,
+
+  priceBox: {
+    flex: 1,
+    alignItems: "center",
+  },
+
+  priceBoxCenter: {
+    transform: [{ scale: 1.1 }], // slight emphasis on middle
+  },
+
+  priceValue: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+  },
+
+  priceValueStrike: {
+    fontSize: 14,
     color: "#999",
     textDecorationLine: "line-through",
-    marginBottom: 2,
   },
-  regularPrice: {
-    fontSize: 13,
-    color: "#555",
-    marginBottom: 2,
-  },
-  yourPrice: {
-    fontSize: 16,
+
+  priceValueHighlight: {
+    fontSize: 18,
     fontWeight: "700",
     color: "#28a745",
+  },
+
+  priceLabel: {
+    fontSize: 12,
+    color: "#777",
+    marginTop: 2,
   },
 
   statsRow: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 16,
+    marginVertical: 16,
+  },
+  statBox: {
+    flex: 1, // give each box space to lay out children
+    flexDirection: "row",
+    alignItems: "center", // vertically center icon + text
+    paddingHorizontal: 6,
   },
   stat: {
     fontSize: 13,
     color: "#555",
-    flex: 1,
+    // remove flex: 1 from text; let container control width
+    marginLeft: 8, // spacing between icon and text
   },
   textLeft: {
     textAlign: "left",
@@ -201,6 +256,15 @@ const styles = StyleSheet.create({
   textRight: {
     textAlign: "right",
   },
+  // extra: make sure the second box aligns its content to the right
+  statBoxRight: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end", // push content to the right side
+    paddingHorizontal: 6,
+  },
+
   bookButton: {
     backgroundColor: "#007bff",
     paddingVertical: 14,

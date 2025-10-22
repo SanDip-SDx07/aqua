@@ -84,11 +84,12 @@ export const Counter = ({
   counter,
   setCounter,
   color,
+  maxCounter = 30,
 }: {
   counter: number;
   setCounter: (key: number | any) => void;
-  bgColor?: string;
   color?: string;
+  maxCounter?: number;
 }) => (
   <View style={styles.counterContainer}>
     <TouchableOpacity
@@ -104,7 +105,11 @@ export const Counter = ({
     />
     <TouchableOpacity
       style={[styles.counterButton, color && { backgroundColor: color }]}
-      onPress={() => setCounter((prev: number) => (prev < 30 ? prev + 1 : 30))}
+      onPress={() =>
+        setCounter((prev: number) =>
+          prev < maxCounter ? prev + 1 : maxCounter
+        )
+      }
     >
       <Text style={styles.counterSymbol}>+</Text>
     </TouchableOpacity>
