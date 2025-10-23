@@ -8,6 +8,7 @@ import SubsModel from "../modals/SubsModel";
 import STCModel from "../modals/STCModel";
 import OrderModalScreen from "../modals/OrderModal";
 import type { RootStackParamList } from "../types";
+import TransactionHistory from "../modals/WHModel";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -40,6 +41,11 @@ export default function NavStack() {
         <Stack.Screen
           name="Order"
           component={OrderModalScreen}
+          options={{ headerShown: true, presentation: "modal" }}
+        />
+        <Stack.Screen
+          name="Wallet History"
+          component={TransactionHistory}
           options={{ headerShown: true, presentation: "modal" }}
         />
       </Stack.Navigator>

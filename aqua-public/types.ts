@@ -43,4 +43,5 @@ export type RootStackParamList = {
   ["Subscription"]: undefined;
   ["Subscription Terms"]: undefined;
   Order: { orderId?: string };
+  ["Wallet History"]: undefined;
 };

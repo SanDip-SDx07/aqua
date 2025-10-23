@@ -7,6 +7,10 @@ import {
   ScrollView,
 } from "react-native";
 import { CircleMinus, CirclePlus, Wallet } from "lucide-react-native";
+import { type Transaction, sampleTransactions } from "../../data/transactions";
+import { useNavigation } from "@react-navigation/native";
+import type { RootStackParamList } from "../../types";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function WalletSummaryCard({
   balance,
@@ -74,25 +78,10 @@ export function TransactionItem({
   );
 }
 
-const sampleTransactions = [
-  {
-    type: "credit",
-    description: "Recharge",
-    amount: 500,
-    balance: 700,
-    date: "23 Oct 2025, 13:20",
-  },
-  {
-    type: "debit",
-    description: "Subscription Renewal",
-    amount: 120,
-    balance: 480,
-    date: "22 Oct 2025, 09:15",
-  },
-  // Add up to 10 sample transactions
-];
-
 export default function WalletScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList, "Tabs">>();
+
   const handleRecharge = () => {
     console.log("Recharge pressed");
   };
@@ -100,6 +89,8 @@ export default function WalletScreen() {
   const handleWithdraw = () => {
     console.log("Withdraw pressed");
   };
+
+  const transactions: Transaction[] = sampleTransactions;
 
   return (
     <ScrollView
@@ -118,7 +109,7 @@ export default function WalletScreen() {
         onWithdraw={handleWithdraw}
       />
       <View style={styles.transactions}>
-        {sampleTransactions.slice(0, 10).map((tx, index) => (
+        {transactions.slice(0, 5).map((tx, index) => (
           <TransactionItem
             key={index}
             type={tx.type as "credit" | "debit"}
@@ -129,6 +120,22 @@ export default function WalletScreen() {
           />
         ))}
       </View>
+
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 25 }}
+        contentContainerStyle={{
+          padding: 16,
+          alignItems: "center", // layout children horizontal center
+          justifyContent: "flex-start", // layout children vertically from the top
+        }}
+      >
+        <TouchableOpacity
+          style={styles.passbookButton}
+          onPress={() => navigation.push("Wallet History")}
+        >
+          <Text style={styles.passbookButtonText}>Passbook</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </ScrollView>
   );
 }
@@ -188,4 +195,26 @@ const styles = StyleSheet.create({
   date: { fontSize: 12, color: "#999" },
   amount: { fontSize: 16, fontWeight: "600" },
   balanceText: { fontSize: 10, color: "#8f8f8fff", fontWeight: "600" },
+
+  passbookButtonContainer: {
+    alignItems: "center",
+    marginVertical: 12,
+  },
+  passbookButton: {
+    backgroundColor: "#1e88e5",
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3, // for Android shadow
+  },
+  passbookButtonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+    textAlign: "center",
+  },
 });
