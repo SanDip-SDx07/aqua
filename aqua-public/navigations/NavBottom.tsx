@@ -6,7 +6,7 @@ import { Home, ClipboardList, Wallet, Bell, User } from "lucide-react-native";
 
 import HomeScreen from "../screens/home/Home";
 import OrdersScreen from "../screens/orders/Orders";
-import WalletScreen from "../screens/Wallets";
+import WalletScreen from "../screens/wallet/Wallets";
 import NotificationScreen from "../screens/Notification";
 import ProfileScreen from "../screens/Profile";
 

@@ -30,8 +30,12 @@ import { orders } from "../../data/orders";
 export default function OrdersMain() {
   return (
     <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
+      style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 25 }}
+      contentContainerStyle={{
+        padding: 16,
+        alignItems: "center", // layout children horizontal center
+        justifyContent: "flex-start", // layout children vertically from the top
+      }}
     >
       {orders && orders.map((order) => <Order key={order.id} order={order} />)}
     </ScrollView>
@@ -92,16 +96,6 @@ export function Order({ order }: { order?: Order }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f6f8fb",
-    marginTop: 25,
-  },
-  contentContainer: {
-    padding: 16,
-    alignItems: "center", // layout children horizontal center
-    justifyContent: "flex-start", // layout children vertically from the top
-  },
   card: {
     backgroundColor: "#fff",
     padding: 12,
