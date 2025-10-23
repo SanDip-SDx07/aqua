@@ -48,7 +48,7 @@ export function ShortNotification({
     <TouchableOpacity
       style={{ width: "100%" }}
       onPress={() =>
-        navigation.push("notification", { notificationId: notification?.id })
+        navigation.push("Notification", { notificationId: notification?.id })
       }
     >
       <View style={[styles.shortContainer, { padding: isTablet ? 16 : 12 }]}>
@@ -63,28 +63,6 @@ export function ShortNotification({
     </TouchableOpacity>
   );
 }
-
-// ================= Full Notification =================
-// export function NotificationScreen({
-//   notification,
-// }) => {
-//   const { width } = useWindowDimensions();
-//   const isTablet = width >= 768;
-
-//   return (
-//     <View style={[styles.fullContainer, { padding: isTablet ? 20 : 16 }]}>
-//       <Text style={[styles.fullTitle, { fontSize: isTablet ? 22 : 18 }]}>
-//         {notification.title}
-//       </Text>
-//       <Text style={[styles.fullMessage, { fontSize: isTablet ? 18 : 14 }]}>
-//         {notification.message}
-//       </Text>
-//       <Text style={[styles.fullDate, { fontSize: isTablet ? 16 : 12 }]}>
-//         {notification.date}
-//       </Text>
-//     </View>
-//   );
-// };
 
 // ================= Styles =================
 const styles = StyleSheet.create({
@@ -107,33 +85,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   shortDate: {
-    fontSize: 12,
-    color: "#999",
-    textAlign: "right",
-  },
-  fullContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 14,
-    marginVertical: 8,
-    padding: 16,
-    width: "100%",
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 3 },
-    shadowRadius: 6,
-    elevation: 4, // Android
-  },
-  fullTitle: {
-    fontWeight: "700",
-    color: "#1d1d1d",
-    marginBottom: 8,
-  },
-  fullMessage: {
-    color: "#444",
-    marginBottom: 10,
-    lineHeight: 20,
-  },
-  fullDate: {
     fontSize: 12,
     color: "#999",
     textAlign: "right",

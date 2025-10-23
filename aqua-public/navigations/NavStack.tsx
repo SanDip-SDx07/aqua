@@ -1,14 +1,15 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import type { RootStackParamList } from "../types";
 
 import NavBottom from "./NavBottom";
-import QAIModel from "../modals/QAIModel";
-import SubsModel from "../modals/SubsModel";
-import STCModel from "../modals/STCModel";
+import QAIModel from "../modals/QAIModal";
+import SubsModel from "../modals/SubsModal";
+import STCModel from "../modals/STCModal";
 import OrderModalScreen from "../modals/OrderModal";
-import type { RootStackParamList } from "../types";
-import TransactionHistory from "../modals/WHModel";
+import TransactionHistory from "../modals/WHModal";
+import NotificationModelScreen from "../modals/NotifyModal";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -46,6 +47,11 @@ export default function NavStack() {
         <Stack.Screen
           name="Wallet History"
           component={TransactionHistory}
+          options={{ headerShown: true, presentation: "modal" }}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={NotificationModelScreen}
           options={{ headerShown: true, presentation: "modal" }}
         />
       </Stack.Navigator>

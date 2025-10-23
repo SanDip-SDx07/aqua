@@ -33,8 +33,15 @@ export function OrderModal({ order }: { order?: Order | undefined }) {
   return (
     <OrderContextProvider>
       <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+        style={{
+          flex: 1,
+          backgroundColor: "#f6f8fb",
+        }}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
       >
         <View style={styles.card}>
           {/* Header */}
@@ -98,15 +105,6 @@ export function OrderModal({ order }: { order?: Order | undefined }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f6f8fb",
-  },
-  contentContainer: {
-    paddingHorizontal: 16,
-    alignItems: "center", // layout children horizontal center
-    justifyContent: "flex-start", // layout children vertically from the top
-  },
   card: {
     backgroundColor: "#fff",
     padding: 12,

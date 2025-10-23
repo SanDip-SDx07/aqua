@@ -44,7 +44,7 @@ export type RootStackParamList = {
   ["Subscription Terms"]: undefined;
   Order: { orderId?: string };
   ["Wallet History"]: undefined;
-  notification: { notificationId: string };
+  Notification: { notificationId?: string };
 };
 
 export type Notification = {

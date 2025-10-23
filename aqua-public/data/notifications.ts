@@ -33,7 +33,7 @@ export const sampleNotifications: Notification[] = [
     id: "n005",
     title: "Maintenance Alert",
     message:
-      "System maintenance scheduled on 25 Oct 2025 from 02:00 to 04:00 AM.",
+      "Dear users, we will be performing a scheduled server maintenance starting on 25 Oct 2025 at 02:00 AM and ending at 06:00 AM. During this period, all wallet transactions, order placements, and subscription services may be temporarily unavailable. We strongly recommend that you complete any urgent transactions before the maintenance window. Our team is working hard to ensure minimal disruption, and normal service will resume as soon as the maintenance is complete. Thank you for your understanding and patience.",
     date: "20 Oct 2025, 22:00",
     type: "warning",
   },
