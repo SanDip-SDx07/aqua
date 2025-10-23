@@ -12,85 +12,21 @@ import {
   ContainerItem,
   DeliverySection,
   FeedbackSection,
-} from "./OrderParts";
-import OrderContextProvider from "./OrderContext";
-import type { Order } from "../../types";
+} from "../screens/orders/OrderParts";
+import OrderContextProvider from "../screens/orders/OrderContext";
+import type { Order, RootStackParamList } from "../types";
 import { Calendar, CircleCheck, MapPin } from "lucide-react-native";
+import type { StackScreenProps } from "@react-navigation/stack";
 
-export const orders: Order[] = [
-  {
-    id: "#ORD-2941",
-    tag: "Premium",
-    status: "Delivered",
-    orderDate: "22 Oct 2025, 9:30 AM",
-    location: "221, MG Road, Kolkata",
-    quantity: 3,
-    containers: [
-      { id: "CN-10012", type: "Order", status: "Delivered" },
-      { id: "CN-10009", type: "Pickup", status: "In Transit" },
-      { id: "CN-10015", type: "Order", status: "Delivered" },
-    ],
-    delivery: {
-      id: "DLV-412",
-      partner: { id: "DP-104", name: "Rahul Sharma" },
-      deliveredAt: "22 Oct 2025, 10:45 AM",
-    },
-    feedback: 4,
-  },
-  {
-    id: "#ORD-2942",
-    tag: "Regular",
-    status: "In Progress",
-    orderDate: "23 Oct 2025, 2:15 PM",
-    location: "56, Park Street, Kolkata",
-    quantity: 2,
-    containers: [
-      { id: "CN-10020", type: "Order", status: "In Progress" },
-      { id: "CN-10021", type: "Pickup", status: "Pending" },
-    ],
-    delivery: {
-      id: "DLV-413",
-      partner: { id: "DP-105", name: "Anita Singh" },
-    },
-    feedback: undefined,
-  },
-  {
-    id: "#ORD-2943",
-    tag: "Premium",
-    status: "Pending",
-    orderDate: "24 Oct 2025, 11:00 AM",
-    location: "78, Camac Street, Kolkata",
-    quantity: 1,
-    containers: [{ id: "CN-10025", type: "Order", status: "Pending" }],
-    delivery: undefined,
-    feedback: undefined,
-  },
-];
-
-// export default function OrdersMain() {
-//   return (
-//     <FlatList
-//       data={orders}
-//       keyExtractor={(order) => order.id}
-//       renderItem={({ item }) => <Order order={item} />}
-//       contentContainerStyle={styles.contentContainer}
-//       showsVerticalScrollIndicator={false}
-//     />
-//   );
-// }
-
-export default function OrdersMain() {
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      {orders && orders.map((order) => <Order key={order.id} order={order} />)}
-    </ScrollView>
-  );
+export default function OrderModalScreen({
+  route,
+}: StackScreenProps<RootStackParamList, "Order">) {
+  const { orderId } = route.params;
+  const order = undefined;
+  return <OrderModal order={order} />;
 }
 
-export function Order({ order }: { order?: Order }) {
+export function OrderModal({ order }: { order?: Order | undefined }) {
   if (!order) return null;
 
   return (
@@ -123,15 +59,6 @@ export function Order({ order }: { order?: Order }) {
           </View>
         </View>
 
-        {/* Containers List */}
-        {/* <FlatList
-          data={order.containers}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ContainerItem container={item} />}
-          scrollEnabled={false} // important: expands instead of scrolling
-          nestedScrollEnabled={true} // optional for nested behavior
-          style={{ marginVertical: 8 }}
-        /> */}
         {order.containers?.map((container) => (
           <ContainerItem key={container.id} container={container} />
         ))}

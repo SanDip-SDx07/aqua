@@ -36,3 +36,11 @@ export interface Order {
   delivery?: DeliveryInfo | undefined;
   feedback?: number | undefined; // 1-5 stars
 }
+
+export type RootStackParamList = {
+  Tabs: undefined;
+  ["AquaCare+"]: undefined;
+  ["Subscription"]: undefined;
+  ["Subscription Terms"]: undefined;
+  Order: { orderId?: string };
+};

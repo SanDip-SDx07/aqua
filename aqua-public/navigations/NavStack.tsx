@@ -6,6 +6,7 @@ import NavBottom from "./NavBottom";
 import QAIModel from "../modals/QAIModel";
 import SubsModel from "../modals/SubsModel";
 import STCModel from "../modals/STCModel";
+import OrderModalScreen from "../modals/OrderModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default function NavStack() {
         <Stack.Screen
           name="Subscription Terms"
           component={STCModel}
+          options={{ headerShown: true, presentation: "modal" }}
+        />
+        <Stack.Screen
+          name="Order"
+          component={OrderModalScreen}
           options={{ headerShown: true, presentation: "modal" }}
         />
       </Stack.Navigator>

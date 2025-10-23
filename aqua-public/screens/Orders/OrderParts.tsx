@@ -1,4 +1,3 @@
-// ModernOrderComponents.tsx
 import React from "react";
 import {
   View,
@@ -7,8 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import type { Container, DeliveryInfo, OrderStatus } from "./OrderTypes";
-import { Star, Calendar, MapPin, CircleCheck } from "lucide-react-native";
+import type { Container, DeliveryInfo, OrderStatus } from "../../types";
+import { MessageCircle, PhoneCall, Star } from "lucide-react-native";
 
 // -------- StatusChip --------
 const statusColors: Record<OrderStatus, { text: string; bg: string }> = {
@@ -60,9 +59,22 @@ export function DeliverySection({ delivery }: { delivery?: DeliveryInfo }) {
           Delivered: {delivery.deliveredAt}
         </Text>
       )}
-      <TouchableOpacity style={styles.trackButton}>
-        <Text style={styles.trackButtonText}>Track on Map</Text>
-      </TouchableOpacity>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.trackButton}>
+          <Text style={styles.trackButtonText}>Track on Map</Text>
+        </TouchableOpacity>
+
+        <View style={styles.iconButtonContainer}>
+          <TouchableOpacity style={styles.iconButton}>
+            <MessageCircle size={20} color={"#0288D1"} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.iconButton}>
+            <PhoneCall size={20} color={"#0288D1"} />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
@@ -132,15 +144,39 @@ const styles = StyleSheet.create({
   },
   viewButtonText: { color: "#fff", fontSize: 12, fontWeight: "600" },
 
-  trackButton: {
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 8,
+  },
+  trackButton: {
+    height: 42,
     backgroundColor: "#0288D1",
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 12,
     alignSelf: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
   },
   trackButtonText: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  iconButtonContainer: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  iconButton: {
+    width: 42,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    backgroundColor: "#f2f2f2",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
 
   containerText: { fontSize: 14, color: "#424242", marginVertical: 2 },
 
