@@ -21,19 +21,19 @@ export default function NavStack() {
         />
         {/* Modals */}
         <Stack.Screen
-          name="AquaCareModal"
+          name="AquaCare+"
           component={QAIModel}
-          options={{ headerShown: false, presentation: "modal" }}
+          options={{ headerShown: true, presentation: "modal" }}
         />
         <Stack.Screen
-          name="PremiumModal"
+          name="Subscription"
           component={SubsModel}
-          options={{ headerShown: false, presentation: "modal" }}
+          options={{ headerShown: true, presentation: "modal" }}
         />
         <Stack.Screen
-          name="TermsModal"
+          name="Subscription Terms"
           component={STCModel}
-          options={{ headerShown: false, presentation: "modal" }}
+          options={{ headerShown: true, presentation: "modal" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

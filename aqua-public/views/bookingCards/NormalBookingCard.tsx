@@ -20,7 +20,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Info } from "lucide-react-native";
 import DaysSlider from "../../components/DaysSlider";
 
-export function NormalBookingCard({
+export default function NormalBookingCard({
   distance = 2,
   deliveryCharge = 5,
   containerRentPerDay = 5,

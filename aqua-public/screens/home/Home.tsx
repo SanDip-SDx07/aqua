@@ -1,10 +1,11 @@
 import React from "react";
-import SubsDisplayCard from "../views/Subscription/SubsDisplayCard";
 import { ScrollView, StyleSheet } from "react-native";
-import QualityAssuranceCard from "../views/QualityAssurance/QualityAssuranceCard";
-import { NormalBookingCard } from "../views/bookingCards/NormalBookingCard";
-import SubscribedCard from "../views/Subscription/SubscribedCard";
+
 import HomeContextProvider from "./HomeContext";
+import SubsDisplayCard from "../../views/Subscription/SubsDisplayCard";
+import QualityAssuranceCard from "../../views/QualityAssurance/QualityAssuranceCard";
+import NormalBookingCard from "../../views/bookingCards/NormalBookingCard";
+import SubscribedCard from "../../views/Subscription/SubscribedCard";
 
 export default function HomeMain({ children }: { children?: React.ReactNode }) {
   return (

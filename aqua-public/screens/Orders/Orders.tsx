@@ -4,10 +4,9 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
+  // FlatList,
   ScrollView,
 } from "react-native";
-
 import {
   StatusChip,
   ContainerItem,
@@ -17,7 +16,6 @@ import {
 import OrderContextProvider from "./OrderContext";
 import type { Order } from "./OrderTypes";
 import { Calendar, CircleCheck, MapPin } from "lucide-react-native";
-import WaterJarIcon from "../../assets/WaterJarIcon";
 
 export const orders: Order[] = [
   {

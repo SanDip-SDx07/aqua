@@ -58,7 +58,6 @@ export default function SubsModel() {
         flex: 1,
         padding: 16,
         backgroundColor: "#fff",
-        marginTop: 35,
       }}
     >
       <IndividualSubscription />

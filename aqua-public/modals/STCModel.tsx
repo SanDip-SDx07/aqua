@@ -277,7 +277,7 @@ export default function STCModel() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 16, marginTop: 35 },
+  container: { flex: 1, backgroundColor: "#fff", padding: 16 },
   header: {
     fontSize: 20,
     fontWeight: "700",

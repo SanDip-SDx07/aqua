@@ -8,9 +8,9 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type RootStackParamList = {
   Tabs: undefined;
-  AquaCareModal: undefined;
-  PremiumModal: undefined;
-  TermsModal: undefined;
+  ["AquaCare+"]: undefined;
+  ["Subscription"]: undefined;
+  ["Subscription Terms"]: undefined;
 };
 
 export default function QualityAssuranceCard(): React.ReactElement {
@@ -32,7 +32,7 @@ export default function QualityAssuranceCard(): React.ReactElement {
         <Text style={styles.headerText}>AquaCare+ 100% Quality Product</Text>
         <TouchableOpacity
           style={styles.infoBtn}
-          onPress={() => navigation.push("AquaCareModal")}
+          onPress={() => navigation.push("AquaCare+")}
         >
           <Info size={18} color="#0077cc" />
           <Text style={styles.infoText}>Learn More</Text>

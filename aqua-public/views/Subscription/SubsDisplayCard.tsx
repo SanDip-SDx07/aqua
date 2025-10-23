@@ -6,9 +6,9 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type RootStackParamList = {
   Tabs: undefined;
-  AquaCareModal: undefined;
-  PremiumModal: undefined;
-  TermsModal: undefined;
+  ["AquaCare+"]: undefined;
+  ["Subscription"]: undefined;
+  ["Subscription Terms"]: undefined;
 };
 
 export default function SubsDisplayCard() {
@@ -32,14 +32,14 @@ export default function SubsDisplayCard() {
         <View style={styles.bottomRow}>
           <TouchableOpacity
             style={styles.subscribeBtn}
-            onPress={() => navigation.push("PremiumModal")}
+            onPress={() => navigation.push("Subscription")}
           >
             <Text style={styles.subscribeText}>Explore Premium</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.infoButton}
-            onPress={() => navigation.push("TermsModal")}
+            onPress={() => navigation.push("Subscription Terms")}
           >
             <Info size={18} color="#0077cc" />
           </TouchableOpacity>
