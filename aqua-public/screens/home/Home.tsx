@@ -19,8 +19,16 @@ export default function HomeMain({ children }: { children?: React.ReactNode }) {
 export function Home() {
   return (
     <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
+      style={{
+        flex: 1,
+        backgroundColor: "#f6f8fb",
+        marginTop: 35,
+      }}
+      contentContainerStyle={{
+        padding: 16,
+        alignItems: "center", // layout children horizontal center
+        justifyContent: "flex-start", // layout children vertically from the top
+      }}
     >
       <QualityAssuranceCard />
       <SubsDisplayCard />
@@ -29,16 +37,3 @@ export function Home() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f6f8fb",
-    marginTop: 35,
-  },
-  contentContainer: {
-    padding: 16,
-    alignItems: "center", // layout children horizontal center
-    justifyContent: "flex-start", // layout children vertically from the top
-  },
-});

@@ -30,7 +30,7 @@ import { orders } from "../../data/orders";
 export default function OrdersMain() {
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 25 }}
+      style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 35 }}
       contentContainerStyle={{
         padding: 16,
         alignItems: "center", // layout children horizontal center
