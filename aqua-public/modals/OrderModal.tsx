@@ -17,12 +17,13 @@ import OrderContextProvider from "../screens/orders/OrderContext";
 import type { Order, RootStackParamList } from "../types";
 import { Calendar, CircleCheck, MapPin } from "lucide-react-native";
 import type { StackScreenProps } from "@react-navigation/stack";
+import { orders } from "../data/orders";
 
 export default function OrderModalScreen({
   route,
 }: StackScreenProps<RootStackParamList, "Order">) {
   const { orderId } = route.params;
-  const order = undefined;
+  const order = orders.find((order) => order.id === orderId);
   return <OrderModal order={order} />;
 }
 
@@ -31,54 +32,67 @@ export function OrderModal({ order }: { order?: Order | undefined }) {
 
   return (
     <OrderContextProvider>
-      <View style={styles.card}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.orderId}>#{order.id}</Text>
-          <StatusChip status={order.status} />
-        </View>
-
-        {/* Tag */}
-        <View style={[styles.tag]}>
-          <Text style={styles.tagText}>{order.tag}</Text>
-        </View>
-
-        {/* Order Info */}
-        <View style={styles.info}>
-          <View style={styles.infoRow}>
-            <Calendar size={18} />
-            <Text style={styles.infoText}>{order.orderDate}</Text>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <View style={styles.card}>
+          {/* Header */}
+          <View style={styles.header}>
+            <Text style={styles.orderId}>#{order.id}</Text>
+            <StatusChip status={order.status} />
           </View>
-          <View style={styles.infoRow}>
-            <MapPin size={18} />
-            <Text style={styles.infoText}>{order.location}</Text>
+
+          {/* Tag */}
+          <View style={[styles.tag]}>
+            <Text style={styles.tagText}>{order.tag}</Text>
           </View>
-          <View style={styles.infoRow}>
-            <CircleCheck size={18} />
-            <Text style={styles.infoText}>{order.quantity} Containers</Text>
+
+          {/* Order Info */}
+          <View style={styles.info}>
+            <View style={styles.infoRow}>
+              <Calendar size={18} />
+              <Text style={styles.infoText}>{order.orderDate}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <MapPin size={18} />
+              <Text style={styles.infoText}>{order.location}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <CircleCheck size={18} />
+              <Text style={styles.infoText}>{order.quantity} Containers</Text>
+            </View>
+          </View>
+
+          {/* <FlatList
+          data={order.containers}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <ContainerItem container={item} />}
+          scrollEnabled={false} // important: expands instead of scrolling
+          nestedScrollEnabled={true} // optional for nested behavior
+          style={{ marginVertical: 8 }}
+        /> */}
+          {order.containers?.map((container) => (
+            <ContainerItem key={container.id} container={container} />
+          ))}
+
+          {/* Delivery Section */}
+          {order.delivery && <DeliverySection delivery={order.delivery} />}
+
+          {/* Feedback / Report Section */}
+          {order.feedback && <FeedbackSection rating={order.feedback} />}
+
+          {/* Action Buttons */}
+          <View style={styles.actionsRow}>
+            <TouchableOpacity style={styles.primaryButton}>
+              <Text style={styles.reorderText}>Order Again</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.secondaryButton}>
+              <Text style={styles.cancelText}>Cancel</Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        {order.containers?.map((container) => (
-          <ContainerItem key={container.id} container={container} />
-        ))}
-
-        {/* Delivery Section */}
-        {order.delivery && <DeliverySection delivery={order.delivery} />}
-
-        {/* Feedback / Report Section */}
-        {order.feedback && <FeedbackSection rating={order.feedback} />}
-
-        {/* Action Buttons */}
-        <View style={styles.actionsRow}>
-          <TouchableOpacity style={styles.primaryButton}>
-            <Text style={styles.reorderText}>Order Again</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.secondaryButton}>
-            <Text style={styles.cancelText}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </OrderContextProvider>
   );
 }
@@ -87,10 +101,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f6f8fb",
-    marginTop: 25,
   },
   contentContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
     alignItems: "center", // layout children horizontal center
     justifyContent: "flex-start", // layout children vertically from the top
   },

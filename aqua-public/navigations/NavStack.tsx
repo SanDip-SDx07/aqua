@@ -7,8 +7,9 @@ import QAIModel from "../modals/QAIModel";
 import SubsModel from "../modals/SubsModel";
 import STCModel from "../modals/STCModel";
 import OrderModalScreen from "../modals/OrderModal";
+import type { RootStackParamList } from "../types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function NavStack() {
   return (

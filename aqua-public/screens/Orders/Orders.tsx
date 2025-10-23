@@ -7,65 +7,13 @@ import {
   // FlatList,
   ScrollView,
 } from "react-native";
-import {
-  StatusChip,
-  ContainerItem,
-  DeliverySection,
-  FeedbackSection,
-} from "./OrderParts";
+import { StatusChip } from "./OrderParts";
 import OrderContextProvider from "./OrderContext";
-import type { Order } from "../../types";
+import type { Order, RootStackParamList } from "../../types";
 import { Calendar, CircleCheck, MapPin } from "lucide-react-native";
-
-export const orders: Order[] = [
-  {
-    id: "#ORD-2941",
-    tag: "Premium",
-    status: "Delivered",
-    orderDate: "22 Oct 2025, 9:30 AM",
-    location: "221, MG Road, Kolkata",
-    quantity: 3,
-    containers: [
-      { id: "CN-10012", type: "Order", status: "Delivered" },
-      { id: "CN-10009", type: "Pickup", status: "In Transit" },
-      { id: "CN-10015", type: "Order", status: "Delivered" },
-    ],
-    delivery: {
-      id: "DLV-412",
-      partner: { id: "DP-104", name: "Rahul Sharma" },
-      deliveredAt: "22 Oct 2025, 10:45 AM",
-    },
-    feedback: 4,
-  },
-  {
-    id: "#ORD-2942",
-    tag: "Regular",
-    status: "In Progress",
-    orderDate: "23 Oct 2025, 2:15 PM",
-    location: "56, Park Street, Kolkata",
-    quantity: 2,
-    containers: [
-      { id: "CN-10020", type: "Order", status: "In Progress" },
-      { id: "CN-10021", type: "Pickup", status: "Pending" },
-    ],
-    delivery: {
-      id: "DLV-413",
-      partner: { id: "DP-105", name: "Anita Singh" },
-    },
-    feedback: undefined,
-  },
-  {
-    id: "#ORD-2943",
-    tag: "Premium",
-    status: "Pending",
-    orderDate: "24 Oct 2025, 11:00 AM",
-    location: "78, Camac Street, Kolkata",
-    quantity: 1,
-    containers: [{ id: "CN-10025", type: "Order", status: "Pending" }],
-    delivery: undefined,
-    feedback: undefined,
-  },
-];
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { orders } from "../../data/orders";
 
 // export default function OrdersMain() {
 //   return (
@@ -92,55 +40,42 @@ export default function OrdersMain() {
 
 export function Order({ order }: { order?: Order }) {
   if (!order) return null;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList, "Tabs">>();
 
   return (
     <OrderContextProvider>
       <View style={styles.card}>
         {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.orderId}>#{order.id}</Text>
-          <StatusChip status={order.status} />
-        </View>
-
-        {/* Tag */}
-        <View style={[styles.tag]}>
-          <Text style={styles.tagText}>{order.tag}</Text>
-        </View>
-
-        {/* Order Info */}
-        <View style={styles.info}>
-          <View style={styles.infoRow}>
-            <Calendar size={18} />
-            <Text style={styles.infoText}>{order.orderDate}</Text>
+        <TouchableOpacity
+          onPress={() => navigation.push("Order", { orderId: order?.id })}
+        >
+          <View style={styles.header}>
+            <Text style={styles.orderId}>#{order.id}</Text>
+            <StatusChip status={order.status} />
           </View>
-          <View style={styles.infoRow}>
-            <MapPin size={18} />
-            <Text style={styles.infoText}>{order.location}</Text>
+
+          {/* Tag */}
+          <View style={[styles.tag]}>
+            <Text style={styles.tagText}>{order.tag}</Text>
           </View>
-          <View style={styles.infoRow}>
-            <CircleCheck size={18} />
-            <Text style={styles.infoText}>{order.quantity} Containers</Text>
+
+          {/* Order Info */}
+          <View style={styles.info}>
+            <View style={styles.infoRow}>
+              <Calendar size={18} />
+              <Text style={styles.infoText}>{order.orderDate}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <MapPin size={18} />
+              <Text style={styles.infoText}>{order.location}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <CircleCheck size={18} />
+              <Text style={styles.infoText}>{order.quantity} Containers</Text>
+            </View>
           </View>
-        </View>
-
-        {/* Containers List */}
-        {/* <FlatList
-          data={order.containers}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ContainerItem container={item} />}
-          scrollEnabled={false} // important: expands instead of scrolling
-          nestedScrollEnabled={true} // optional for nested behavior
-          style={{ marginVertical: 8 }}
-        /> */}
-        {order.containers?.map((container) => (
-          <ContainerItem key={container.id} container={container} />
-        ))}
-
-        {/* Delivery Section */}
-        {order.delivery && <DeliverySection delivery={order.delivery} />}
-
-        {/* Feedback / Report Section */}
-        {order.feedback && <FeedbackSection rating={order.feedback} />}
+        </TouchableOpacity>
 
         {/* Action Buttons */}
         <View style={styles.actionsRow}>
