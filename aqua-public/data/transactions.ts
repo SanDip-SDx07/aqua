@@ -1,10 +1,4 @@
-export interface Transaction {
-  type: "credit" | "debit";
-  description: string;
-  amount: number;
-  balance: number;
-  date: string; // Format: "23 Oct 2025, 18:45"
-}
+import type { Transaction } from "../types";
 
 export const sampleTransactions: Transaction[] = [
   {

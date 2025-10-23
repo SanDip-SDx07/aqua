@@ -30,7 +30,11 @@ import { orders } from "../../data/orders";
 export default function OrdersMain() {
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 35 }}
+      style={{
+        flex: 1,
+        backgroundColor: "#f6f8fb",
+        // marginTop: 35
+      }}
       contentContainerStyle={{
         padding: 16,
         alignItems: "center", // layout children horizontal center
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 16,
-    marginVertical: 8,
+    marginBottom: 8,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 4,

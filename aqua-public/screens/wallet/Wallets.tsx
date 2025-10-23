@@ -7,9 +7,9 @@ import {
   ScrollView,
 } from "react-native";
 import { CircleMinus, CirclePlus, Wallet } from "lucide-react-native";
-import { type Transaction, sampleTransactions } from "../../data/transactions";
+import { sampleTransactions } from "../../data/transactions";
 import { useNavigation } from "@react-navigation/native";
-import type { RootStackParamList } from "../../types";
+import type { RootStackParamList, Transaction } from "../../types";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function WalletSummaryCard({
@@ -94,7 +94,11 @@ export default function WalletScreen() {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#f6f8fb", marginTop: 25 }}
+      style={{
+        flex: 1,
+        backgroundColor: "#f6f8fb",
+        // marginTop: 25
+      }}
       contentContainerStyle={{
         padding: 16,
         alignItems: "center", // layout children horizontal center
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#fff",
     borderRadius: 12,
-    margin: 16,
+    // margin: 16,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,

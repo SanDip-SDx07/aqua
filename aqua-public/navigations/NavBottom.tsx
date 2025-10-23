@@ -34,6 +34,7 @@ export default function NavBottom() {
           component={OrdersScreen}
           options={{
             tabBarLabel: "Orders",
+            headerShown: true,
             tabBarIcon: ({ color, size }) => (
               <ClipboardList size={size} color={color} />
             ),
@@ -44,6 +45,7 @@ export default function NavBottom() {
           component={WalletScreen}
           options={{
             tabBarLabel: "Wallet",
+            headerShown: true,
             tabBarIcon: ({ color, size }) => (
               <Wallet size={size} color={color} />
             ),
@@ -54,6 +56,7 @@ export default function NavBottom() {
           component={NotificationScreen}
           options={{
             tabBarLabel: "Notification",
+            headerShown: true,
             tabBarIcon: ({ color, size }) => <Bell size={size} color={color} />,
           }}
         />
