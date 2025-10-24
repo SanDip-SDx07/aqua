@@ -1,13 +1,8 @@
-// const express = require("express");
 import express from "express";
-// const cors = require("cors");
 import cors from "cors";
-// const rateLimit = require("express-rate-limit");
 import rateLimit from "express-rate-limit";
-// const cookieParser = require("cookie-parser");
 import cookieParser from "cookie-parser";
 
-// const connectMongoDB = require("../config/connectMongoDB");
 import connectMongoDB from "./config/connectMongoDB";
 
 const app = express();
@@ -20,7 +15,7 @@ const startServer = async () => {
     await connectMongoDB();
 
     // Starting the Server
-    await app.listen(PORT, "0.0.0.0", () => {
+    await app.listen(PORT as number, "0.0.0.0", () => {
       console.log(`Sarver running at http://0.0.0.0${PORT}`);
     });
   } catch (err) {
