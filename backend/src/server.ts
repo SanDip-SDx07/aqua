@@ -1,11 +1,14 @@
-import { error } from "console";
+// const express = require("express");
+import express from "express";
+// const cors = require("cors");
+import cors from "cors";
+// const rateLimit = require("express-rate-limit");
+import rateLimit from "express-rate-limit";
+// const cookieParser = require("cookie-parser");
+import cookieParser from "cookie-parser";
 
-const express = require("express");
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
-const cookieParser = require("cookie-parser");
-
-const connectMongoDB = require("../config/connectMongoDB");
+// const connectMongoDB = require("../config/connectMongoDB");
+import connectMongoDB from "./config/connectMongoDB";
 
 const app = express();
 

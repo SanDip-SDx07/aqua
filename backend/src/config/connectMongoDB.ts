@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+// const mongoose = require("mongoose");
+// const dotenv = require("dotenv");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -19,7 +21,7 @@ const connectionString = mongoUri
 //     .MONGO_URI!.replace("<db_password>", process.env.MONGO_PASSWORD!)
 //     .replace("<db_name>", process.env.MONGO_NAME!);
 
-module.exports = async () => {
+const connectMongoDB = async () => {
   try {
     await mongoose.connect(connectionString);
     console.log("MongoDB Connected");
@@ -27,3 +29,5 @@ module.exports = async () => {
     console.error(err);
   }
 };
+
+export default connectMongoDB;
