@@ -62,3 +62,12 @@ export interface Transaction {
   balance: number;
   date: string; // Format: "23 Oct 2025, 18:45"
 }
+
+export interface UserInfo {
+  name: string;
+  userId: string;
+  status: "Active" | "Inactive";
+  joinedDate: string;
+  mobile: string;
+  address: string;
+}

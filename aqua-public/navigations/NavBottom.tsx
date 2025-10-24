@@ -8,7 +8,7 @@ import HomeScreen from "../screens/home/Home";
 import OrdersScreen from "../screens/orders/Orders";
 import WalletScreen from "../screens/wallet/Wallets";
 import NotificationScreen from "../screens/Notification";
-import ProfileScreen from "../screens/Profile";
+import ProfileScreen from "../screens/profile/Profile";
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -65,6 +65,7 @@ export default function NavBottom() {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
+            headerShown: true,
             tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
           }}
         />
