@@ -10,15 +10,15 @@ const dotenv = require("dotenv");
 
 // Import custom modules
 // ===================================================
-const connectMongoDB = require("../config/cMongoDB");
-const { connectRedis } = require("../config/cRedis");
-const globalRouteHandler = require("./@utils/globalRouteHandler");
+const connectMongoDB = require("./@config/connectMongoDB");
+// const { connectRedis } = require("./config/connectRedis");
+// const globalRouteHandler = require("./@utils/globalRouteHandler");
 const AppError = require("./@utils/AppError");
 // const userRouter = require("./routes/userRouter/userRouter-Index");
 
 // Load environment variables
 // ===================================================
-dotenv.config();
+dotenv.config({ path: "./config.env", debug: true });
 
 // Initialize Express app
 const app = express();
@@ -37,13 +37,13 @@ app.use(
 );
 
 // Optional: Handle OPTIONS preflight
-app.options(
-  "*",
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  }),
-);
+// app.options(
+//   "*",
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   }),
+// );
 
 // Example for specific origin and credentials:
 // app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
@@ -74,13 +74,13 @@ app.use(express.json());
 
 // ❌ Handle Undefined Routes
 // ===================================================
-app.all("*", (req, res, next) => {
-  next(new AppError("Can't find this route on our server.", 404));
-});
+// app.all("*", (req, res, next) => {
+//   next(new AppError("Can't find this route on our server.", 404));
+// });
 
 // 🛡 Global Error Handler Middleware
 // ===================================================
-app.use(globalRouteHandler);
+// app.use(globalRouteHandler);
 
 // 🚀 Server Start Function
 // ===================================================
@@ -90,7 +90,7 @@ const startServer = async () => {
   try {
     // Connect to databases
     await connectMongoDB();
-    await connectRedis();
+    // await connectRedis();
 
     // Start listening on the specified port
     app.listen(port, "0.0.0.0", () => {
