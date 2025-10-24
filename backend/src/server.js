@@ -1,31 +1,107 @@
+// 🌐 Global Middlewares & Server Setup
+
+// Core Dependencies
+// ==================================================
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 const cookieParser = require("cookie-parser");
-const connectMongoDB = require("./config/connectMongoDB");
+const dotenv = require("dotenv");
 
+// Import custom modules
+// ===================================================
+const connectMongoDB = require("../config/cMongoDB");
+const { connectRedis } = require("../config/cRedis");
+const globalRouteHandler = require("./@utils/globalRouteHandler");
+const AppError = require("./@utils/AppError");
+// const userRouter = require("./routes/userRouter/userRouter-Index");
+
+// Load environment variables
+// ===================================================
+dotenv.config();
+
+// Initialize Express app
 const app = express();
 
-const PORT = process.env?.PORT || 8000;
+// 🔓 Allow Cross-Origin-Resource-Sharing (CORS)
+// Basic CORS - allows all origins
+// ===================================================
+// app.use(cors());
+// app.options("*", cors());
+// 🔓 Allow Cross-Origin-Resource-Sharing (CORS)
+app.use(
+  cors({
+    origin: "http://localhost:3000", // your frontend origin
+    credentials: true, // allow cookies
+  }),
+);
+
+// Optional: Handle OPTIONS preflight
+app.options(
+  "*",
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  }),
+);
+
+// Example for specific origin and credentials:
+// app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
+
+// 🚦 Rate Limiting Middleware
+// Protects against too many requests from the same IP
+// ===================================================
+// const limiter = rateLimit({
+//   max: 100, // limit each IP to 100 requests
+//   windowMs: 60 * 60 * 1000, // per 1 hour
+//   message: "Too many requests from this IP, please try again after an hour"
+// });
+// app.use("/api", limiter);
+
+// 📦 Cookie Parser Middleware
+// Parses incoming cookie request
+// ===================================================
+app.use(cookieParser());
+
+// 📦 Body Parser Middleware
+// Parses incoming JSON request bodies
+// ===================================================
+app.use(express.json());
+
+// 📌 API Routes
+// ===================================================
+// app.use("/api/v1/users", userRouter);
+
+// ❌ Handle Undefined Routes
+// ===================================================
+app.all("*", (req, res, next) => {
+  next(new AppError("Can't find this route on our server.", 404));
+});
+
+// 🛡 Global Error Handler Middleware
+// ===================================================
+app.use(globalRouteHandler);
+
+// 🚀 Server Start Function
+// ===================================================
+const port = process.env.PORT || 8000;
 
 const startServer = async () => {
   try {
-    // Connect to Database
+    // Connect to databases
     await connectMongoDB();
+    await connectRedis();
 
-    // Starting the Server
-    await app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Sarver running at http://0.0.0.0${PORT}`);
+    // Start listening on the specified port
+    app.listen(port, "0.0.0.0", () => {
+      console.log(`🚀 Server running at http://0.0.0.0:${port}`);
     });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Startup Error:", err);
     process.exit(1);
   }
 };
 
+// ▶️ Start Server
+// ===================================================
 startServer().then();
-
-// yarn workspace backend dev      # development (hot reload)
-// yarn workspace backend build    # compile TS
-// yarn workspace backend start    # run production
-
-// yarn workspace backend add -D @types/cors ...more
