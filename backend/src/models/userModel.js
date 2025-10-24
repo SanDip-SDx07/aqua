@@ -1,13 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-interface IUserProps extends mongoose.Document {
-  username: string;
-  mobileNumber: string;
-  address: string;
-  status: "active" | "blocked";
-}
-
-const userSchema: mongoose.Schema<IUserProps> = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -33,4 +26,4 @@ const userSchema: mongoose.Schema<IUserProps> = new mongoose.Schema(
   { timestamps: true, collection: "users" },
 );
 
-export default mongoose.model<IUserProps>("UserModel", userSchema);
+export default mongoose.model("UserModel", userSchema);

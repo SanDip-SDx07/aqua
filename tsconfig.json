@@ -5,11 +5,10 @@
   },
   "files": [],
   "references": [
-    { "path": "apps/aqua-public" },
+    { "path": "apps/aqua-public" }
     // { "path": "apps/aqua-vendor" },
     // { "path": "apps/aqua-executive" },
     // { "path": "apps/aqua-partner" },
-    // { "path": "packages/aqua-shared" },
-    { "path": "backend" }
+    // { "path": "packages/aqua-shared" }
   ]
 }
