@@ -5,7 +5,9 @@
     "rootDir": "src",
     "module": "commonjs",
     "target": "es2020",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
