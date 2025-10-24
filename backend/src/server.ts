@@ -20,8 +20,11 @@ const startServer = async () => {
     });
   } catch (err) {
     console.error(err);
+    process.exit(1);
   }
 };
+
+startServer().then();
 
 // yarn workspace backend dev      # development (hot reload)
 // yarn workspace backend build    # compile TS
