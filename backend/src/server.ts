@@ -29,3 +29,5 @@ startServer().then();
 // yarn workspace backend dev      # development (hot reload)
 // yarn workspace backend build    # compile TS
 // yarn workspace backend start    # run production
+
+// yarn workspace backend add -D @types/cors ...more
