@@ -1,16 +1,14 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist",
+    "target": "ES2022",
+    "module": "CommonJS",
     "rootDir": "src",
-    "module": "commonjs",
-    "target": "es2020",
-    "esModuleInterop": true,
+    "outDir": "dist",
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node"
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }
