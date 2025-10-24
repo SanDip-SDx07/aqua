@@ -12,6 +12,8 @@ import {
 import type { UserInfo } from "../../types";
 import ProfileContextProvider, { useProfileState } from "./ProfileContext";
 import { QuickPopup } from "../../components/QuickPopup";
+import CallButton from "../../components/CallButton";
+import MessageButton from "../../components/MessageButton";
 
 export default function Profile() {
   return (
@@ -122,12 +124,12 @@ function SupportBox() {
     <View style={styles.supportContainer}>
       <Text style={styles.supportText}>💬 Need Help? Contact Support</Text>
       <View style={styles.supportButtons}>
-        <TouchableOpacity style={styles.supportBtn}>
+        <MessageButton phoneNumber="7003233709" style={styles.supportBtn}>
           <MessageCircle size={20} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.supportBtn}>
+        </MessageButton>
+        <CallButton phoneNumber="7003233709" style={styles.supportBtn}>
           <Phone size={20} />
-        </TouchableOpacity>
+        </CallButton>
       </View>
     </View>
   );
