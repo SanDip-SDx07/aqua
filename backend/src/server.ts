@@ -2,23 +2,29 @@
 
 // Core Dependencies
 // ==================================================
-const express = require("express");
-const cors = require("cors");
-const rateLimit = require("express-rate-limit");
-const cookieParser = require("cookie-parser");
-const dotenv = require("dotenv");
+// const express = require('express');
+// const cors = require('cors');
+// const rateLimit = require('express-rate-limit');
+// const cookieParser = require('cookie-parser');
+// const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 
 // Import custom modules
 // ===================================================
-const connectMongoDB = require("./@config/connectMongoDB");
+// const connectMongoDB = require('./@config/connectMongoDB');
 // const { connectRedis } = require("./config/connectRedis");
 // const globalRouteHandler = require("./@utils/globalRouteHandler");
-const AppError = require("./@utils/AppError");
+// const { AppError } = require('@utils');
 // const userRouter = require("./routes/userRouter/userRouter-Index");
+import connectMongoDB from './@config/connectMongoDB';
+// import { AppError } from '@utils';
 
 // Load environment variables
 // ===================================================
-dotenv.config({ path: "./config.env", debug: true });
+dotenv.config({ path: './config.env', debug: true });
 
 // Initialize Express app
 const app = express();
@@ -31,7 +37,7 @@ const app = express();
 // 🔓 Allow Cross-Origin-Resource-Sharing (CORS)
 app.use(
   cors({
-    origin: "http://localhost:3000", // your frontend origin
+    origin: 'http://localhost:3000', // your frontend origin
     credentials: true, // allow cookies
   }),
 );
@@ -93,11 +99,11 @@ const startServer = async () => {
     // await connectRedis();
 
     // Start listening on the specified port
-    app.listen(port, "0.0.0.0", () => {
+    app.listen(port as number, '0.0.0.0', () => {
       console.log(`🚀 Server running at http://0.0.0.0:${port}`);
     });
   } catch (err) {
-    console.error("❌ Startup Error:", err);
+    console.error('❌ Startup Error:', err);
     process.exit(1);
   }
 };

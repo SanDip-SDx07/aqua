@@ -1,8 +1,8 @@
 const catchAsync = require('../@utils/catchAsync');
 const User = require('../models/userModel');
-const { AppError, isMobile } = require('../../../packages/utils');
+const { AppError, isMobile } = require('@utils');
 
-const userController = {
+module.exports = userController = {
   login: catchAsync(async (req, res, next) => {
     const { mobileNumber } = req.body;
     if (isMobile(mobileNumber)) {

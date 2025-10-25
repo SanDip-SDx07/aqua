@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@packages/*": ["packages/*"],
+      "@shared": ["packages/shared"],
+      "@shared/*": ["packages/shared/*"],
+      "@utils": ["packages/utils"],
+      "@utils/*": ["packages/utils/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.js"],
+  "exclude": ["node_modules", "lib"]
+}
