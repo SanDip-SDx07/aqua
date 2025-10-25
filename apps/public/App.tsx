@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import NavStack from "./navigations/NavStack";
+import NavStack from "./src/navigations/NavStack";
 
 export default function App() {
   return (

@@ -41,7 +41,7 @@ export default function NormalBookingCard({
   return (
     <View style={styles.cardContainer}>
       <Image
-        source={require("../../assets/banner-2.png")}
+        source={require("../../../assets/banner-2.png")}
         style={styles.imageOverlay}
         resizeMode="cover"
       />
