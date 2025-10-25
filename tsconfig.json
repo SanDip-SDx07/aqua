@@ -119,7 +119,7 @@
   },
   // Define the entire source scope of the project (Crucial for monorepos)
   // Include all source files across all sub-folders.
-  "include": ["backend/**/*", "packages/**/*"],
+  "include": ["backend", "packages/**/*"],
 
   // 4. Exclude only the compiled output and dependencies
   "exclude": ["node_modules", "dist"]

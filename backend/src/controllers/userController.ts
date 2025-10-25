@@ -2,7 +2,8 @@
 // const User = require('../models/userModel');
 // const { AppError, isMobile } = require('@utils');
 
-import { AppError, isMobile } from '../../../packages/utils';
+// import { AppError, isMobile } from '../../../packages/utils';
+import { AppError, isMobile } from '@aqua/utils';
 import catchAsync from '../@utils/catchAsync';
 import User from '../models/userModel';
 
