@@ -1,9 +1,10 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
     "outDir": "lib",
-    "rootDir": "src",
+    // "rootDir": "src",
     "jsx": "preserve",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -12,6 +13,13 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      // 1. ADD SHARED MONOREPO ALIASES (Fixed Path)
+      "@utils": ["../packages/utils/"],
+      "@utils/*": ["../packages/utils/*"],
+      "@shared": ["../packages/shared/"],
+      "@shared/*": ["../packages/shared/*"],
+
+      // 2. KEEP LOCAL BACKEND ALIASES
       "@utils-local/*": ["src/@utils/*"],
       "@service/*": ["src/@service/*"],
       "@config/*": ["src/@config/*"]

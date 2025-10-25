@@ -1,12 +1,11 @@
 // const mongoose = require("mongoose");
-import e from "express";
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 interface IUser extends mongoose.Document {
   username: string;
   mobileNumber: string;
   address: string;
-  status: "active" | "blocked";
+  status: 'active' | 'blocked';
 }
 
 const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
@@ -28,11 +27,11 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["active", "blocked"],
+      enum: ['active', 'blocked'],
       required: true,
     },
   },
-  { timestamps: true, collection: "users" },
+  { timestamps: true, collection: 'users' },
 );
 
-export default mongoose.model<IUser>("UserModel", userSchema);
+export default mongoose.model<IUser>('UserModel', userSchema);

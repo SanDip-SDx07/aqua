@@ -10,9 +10,12 @@
     "backend"
   ],
   "scripts": {
-    "utils:watch": "yarn --cwd packages/utils dev",
-    "backend:dev": "yarn --cwd backend start:dev",
-    "dev": "concurrently --kill-others \"yarn utils:watch\" \"yarn backend:dev\""
+    "dev:utils": "yarn --cwd packages/utils dev",
+    "dev:backend": "yarn --cwd backend start:dev",
+    "dev": "concurrently --kill-others \"yarn dev:utils\" \"yarn dev:backend\"",
+    "build:utils": "yarn --cwd packages/utils build",
+    "build:backend": "yarn --cwd backend build",
+    "build": "yarn build:utils && yarn build:backend"
   },
   "repository": {
     "type": "git",
