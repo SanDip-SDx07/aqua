@@ -4,6 +4,9 @@ const User = require('../models/userModel');
 const userController = {
   login: catchAsync(async (req, res, next) => {
     const { mobileNumber } = req.body;
+    if (isMobile(mobileNumber)) {
+      new AppError('Invalid mobile number', 400);
+    }
 
     // Logic to authenticate user
   }),
