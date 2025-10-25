@@ -1,0 +1,16 @@
+{
+  "name": "@aque/utils",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}

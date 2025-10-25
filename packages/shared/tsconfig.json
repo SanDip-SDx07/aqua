@@ -11,7 +11,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["packages/aqua-shared/*"]
+      "@packages/*": ["packages/*"],
+      "@shared/*": ["packages/shared/*"],
+      "@utils/*": ["packages/utils/*"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
