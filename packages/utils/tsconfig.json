@@ -12,7 +12,9 @@
     "baseUrl": ".",
     "paths": {
       "@packages/*": ["packages/*"],
+      "@shared": ["packages/shared"],
       "@shared/*": ["packages/shared/*"],
+      "@utils": ["packages/utils"],
       "@utils/*": ["packages/utils/*"]
     }
   },

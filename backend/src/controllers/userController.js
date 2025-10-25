@@ -1,5 +1,6 @@
 const catchAsync = require('../@utils/catchAsync');
 const User = require('../models/userModel');
+const { AppError, isMobile } = require('../../../packages/utils');
 
 const userController = {
   login: catchAsync(async (req, res, next) => {
