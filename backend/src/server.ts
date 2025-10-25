@@ -11,6 +11,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import connectMongoDB from './@config/connectMongoDB';
 
 // Import custom modules
 // ===================================================
@@ -19,7 +20,6 @@ import dotenv from 'dotenv';
 // const globalRouteHandler = require("./@utils/globalRouteHandler");
 // const { AppError } = require('@utils');
 // const userRouter = require("./routes/userRouter/userRouter-Index");
-import connectMongoDB from './@config/connectMongoDB';
 // import { AppError } from '@utils';
 
 // Load environment variables
