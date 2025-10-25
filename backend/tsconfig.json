@@ -4,7 +4,7 @@
     "declaration": true,
     "outDir": "lib",
     "rootDir": "src",
-    "jsx": "react",
+    "jsx": "preserve",
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
@@ -12,7 +12,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@local-utils": ["src/@utils"]
+      "@utils-local/*": ["src/@utils/*"],
+      "@service/*": ["src/@service/*"],
+      "@config/*": ["src/@config/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js"],

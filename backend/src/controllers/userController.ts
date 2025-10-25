@@ -3,7 +3,7 @@
 // const { AppError, isMobile } = require('@utils');
 
 import { AppError, isMobile } from '@utils';
-import catchAsync from '@local-utils/catchAsync';
+import catchAsync from '@utils-local/catchAsync';
 import User from '../models/userModel';
 
 const entry = async (mobileNumber: number) => {};

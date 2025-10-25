@@ -1,5 +1,5 @@
 {
-  "name": "@aque/utils",
+  "name": "@aqua/utils",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,6 +11,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "module"
+  "license": "ISC"
 }

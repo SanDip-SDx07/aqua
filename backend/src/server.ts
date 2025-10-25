@@ -20,7 +20,7 @@ import dotenv from 'dotenv';
 // const { AppError } = require('@utils');
 // const userRouter = require("./routes/userRouter/userRouter-Index");
 // import { AppError } from '@utils';
-import connectMongoDB from './@config/connectMongoDB';
+import connectMongoDB from '@config/connectMongoDB';
 
 // Load environment variables
 // ===================================================

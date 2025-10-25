@@ -10,7 +10,9 @@
     "backend"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "utils:watch": "yarn --cwd packages/utils dev",
+    "backend:dev": "yarn --cwd backend start:dev",
+    "dev": "concurrently --kill-others \"yarn utils:watch\" \"yarn backend:dev\""
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/SanDip-SDx07/aqua/issues"
   },
-  "homepage": "https://github.com/SanDip-SDx07/aqua#readme"
+  "homepage": "https://github.com/SanDip-SDx07/aqua#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }

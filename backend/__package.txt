@@ -5,10 +5,9 @@
   "main": "lib/server.js",
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register src/server.js",
-    "build": "tsc -p tsconfig.json",
-    "start": "node lib/server.js",
-    "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "make": "tsc -p tsconfig.json && node lib/server.js",
+    "build": "node -r tsconfig-paths/register src/server.js",
+    "start": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server.ts",
+    "make": "tsc -p tsconfig.json && node -r tsconfig-paths/register lib/server.js",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "format": "prettier --write 'src/**/*.{ts,js,json,md}'"

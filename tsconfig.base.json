@@ -10,10 +10,10 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@packages/*": ["packages/*"],
-      "@shared": ["packages/shared"],
+      // "@packages/*": ["packages/*"],
+      "@shared": ["packages/shared/"],
       "@shared/*": ["packages/shared/*"],
-      "@utils": ["packages/utils"],
+      "@utils": ["packages/utils/"],
       "@utils/*": ["packages/utils/*"]
     }
   }
