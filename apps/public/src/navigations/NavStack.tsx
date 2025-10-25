@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import type { RootStackParamList } from "../types";
+import type { RootStackParamList } from "../../types";
 
 import NavBottom from "./NavBottom";
 import QAIModel from "../modals/QAIModal";

@@ -5,7 +5,7 @@ import { Info } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { RootStackParamList } from "../../types";
+import type { RootStackParamList } from "../../../types";
 
 export default function QualityAssuranceCard(): React.ReactElement {
   const navigation =

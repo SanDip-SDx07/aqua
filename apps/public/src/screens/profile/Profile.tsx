@@ -9,7 +9,7 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
-import type { UserInfo } from "../../types";
+import type { UserInfo } from "../../../types";
 import ProfileContextProvider, { useProfileState } from "./ProfileContext";
 import { QuickPopup } from "../../components/QuickPopup";
 import CallButton from "../../components/CallButton";

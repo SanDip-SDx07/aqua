@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { Filter } from "lucide-react-native";
-import { sampleTransactions, type Transaction } from "../data/transactions";
+import { sampleTransactions, type Transaction } from "../../data/transactions";
 import { TransactionItem } from "../screens/wallet/Wallets";
 import { QuickPopup } from "../components/QuickPopup";
 

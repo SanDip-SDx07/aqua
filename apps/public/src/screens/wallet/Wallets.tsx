@@ -7,9 +7,9 @@ import {
   ScrollView,
 } from "react-native";
 import { CircleMinus, CirclePlus, Wallet } from "lucide-react-native";
-import { sampleTransactions } from "../../data/transactions";
+import { sampleTransactions } from "../../../data/transactions";
 import { useNavigation } from "@react-navigation/native";
-import type { RootStackParamList, Transaction } from "../../types";
+import type { RootStackParamList, Transaction } from "../../../types";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function WalletSummaryCard({

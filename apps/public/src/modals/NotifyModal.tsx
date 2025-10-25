@@ -5,8 +5,8 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
-import type { Notification, RootStackParamList } from "../types";
-import { sampleNotifications } from "../data/notifications";
+import type { Notification, RootStackParamList } from "../../types";
+import { sampleNotifications } from "../../data/notifications";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 export default function NotificationModelScreen({

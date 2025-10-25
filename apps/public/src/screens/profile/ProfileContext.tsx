@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert } from "react-native";
-import type { UserInfo } from "../../types";
+import type { UserInfo } from "../../../types";
 
 const ProfileContext = React.createContext<
   | { state: InitialProfileState; dispatch: React.Dispatch<ProfileAction> }

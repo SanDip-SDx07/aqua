@@ -7,8 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import type { Notification, RootStackParamList } from "../types";
-import { sampleNotifications } from "../data/notifications";
+import type { Notification, RootStackParamList } from "../../types";
+import { sampleNotifications } from "../../data/notifications";
 import { useNavigation } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 

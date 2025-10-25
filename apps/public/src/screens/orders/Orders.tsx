@@ -7,44 +7,57 @@ import {
   // FlatList,
   ScrollView,
 } from "react-native";
-import {
-  StatusChip,
-  ContainerItem,
-  DeliverySection,
-  FeedbackSection,
-} from "../screens/orders/OrderParts";
-import OrderContextProvider from "../screens/orders/OrderContext";
-import type { Order, RootStackParamList } from "../types";
+import { StatusChip } from "./OrderParts";
+import OrderContextProvider from "./OrderContext";
+import type { Order, RootStackParamList } from "../../../types";
 import { Calendar, CircleCheck, MapPin } from "lucide-react-native";
-import type { StackScreenProps } from "@react-navigation/stack";
-import { orders } from "../data/orders";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { orders } from "../../../data/orders";
 
-export default function OrderModalScreen({
-  route,
-}: StackScreenProps<RootStackParamList, "Order">) {
-  const { orderId } = route.params;
-  const order = orders.find((order) => order.id === orderId);
-  return <OrderModal order={order} />;
+// export default function OrdersMain() {
+//   return (
+//     <FlatList
+//       data={orders}
+//       keyExtractor={(order) => order.id}
+//       renderItem={({ item }) => <Order order={item} />}
+//       contentContainerStyle={styles.contentContainer}
+//       showsVerticalScrollIndicator={false}
+//     />
+//   );
+// }
+
+export default function OrdersMain() {
+  return (
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "#f6f8fb",
+        // marginTop: 35
+      }}
+      contentContainerStyle={{
+        padding: 16,
+        alignItems: "center", // layout children horizontal center
+        justifyContent: "flex-start", // layout children vertically from the top
+      }}
+    >
+      {orders && orders.map((order) => <Order key={order.id} order={order} />)}
+    </ScrollView>
+  );
 }
 
-export function OrderModal({ order }: { order?: Order | undefined }) {
+export function Order({ order }: { order?: Order }) {
   if (!order) return null;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList, "Tabs">>();
 
   return (
     <OrderContextProvider>
-      <ScrollView
-        style={{
-          flex: 1,
-          backgroundColor: "#f6f8fb",
-        }}
-        contentContainerStyle={{
-          paddingHorizontal: 16,
-          alignItems: "center",
-          justifyContent: "flex-start",
-        }}
-      >
-        <View style={styles.card}>
-          {/* Header */}
+      <View style={styles.card}>
+        {/* Header */}
+        <TouchableOpacity
+          onPress={() => navigation.push("Order", { orderId: order?.id })}
+        >
           <View style={styles.header}>
             <Text style={styles.orderId}>#{order.id}</Text>
             <StatusChip status={order.status} />
@@ -70,36 +83,18 @@ export function OrderModal({ order }: { order?: Order | undefined }) {
               <Text style={styles.infoText}>{order.quantity} Containers</Text>
             </View>
           </View>
+        </TouchableOpacity>
 
-          {/* <FlatList
-          data={order.containers}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <ContainerItem container={item} />}
-          scrollEnabled={false} // important: expands instead of scrolling
-          nestedScrollEnabled={true} // optional for nested behavior
-          style={{ marginVertical: 8 }}
-        /> */}
-          {order.containers?.map((container) => (
-            <ContainerItem key={container.id} container={container} />
-          ))}
-
-          {/* Delivery Section */}
-          {order.delivery && <DeliverySection delivery={order.delivery} />}
-
-          {/* Feedback / Report Section */}
-          {order.feedback && <FeedbackSection rating={order.feedback} />}
-
-          {/* Action Buttons */}
-          <View style={styles.actionsRow}>
-            <TouchableOpacity style={styles.primaryButton}>
-              <Text style={styles.reorderText}>Order Again</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.secondaryButton}>
-              <Text style={styles.cancelText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+        {/* Action Buttons */}
+        <View style={styles.actionsRow}>
+          <TouchableOpacity style={styles.primaryButton}>
+            <Text style={styles.reorderText}>Order Again</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.secondaryButton}>
+            <Text style={styles.cancelText}>Cancel</Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
     </OrderContextProvider>
   );
 }
@@ -109,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 16,
-    marginVertical: 8,
+    marginBottom: 8,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 4,

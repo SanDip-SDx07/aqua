@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import type { Container, DeliveryInfo, OrderStatus } from "../../types";
+import type { Container, DeliveryInfo, OrderStatus } from "../../../types";
 import { MessageCircle, PhoneCall, Star } from "lucide-react-native";
 
 // -------- StatusChip --------

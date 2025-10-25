@@ -13,7 +13,7 @@ import {
   Counter,
   SubscriptionCardHeader,
   Water20LLabel,
-} from "../Subscription/SubscriptionCards";
+} from "./SubscriptionCards";
 
 // ✅ Props interface
 interface SubscribedCardProps {
