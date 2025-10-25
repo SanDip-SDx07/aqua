@@ -11,7 +11,6 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import connectMongoDB from './@config/connectMongoDB';
 
 // Import custom modules
 // ===================================================
@@ -21,6 +20,7 @@ import connectMongoDB from './@config/connectMongoDB';
 // const { AppError } = require('@utils');
 // const userRouter = require("./routes/userRouter/userRouter-Index");
 // import { AppError } from '@utils';
+import connectMongoDB from './@config/connectMongoDB';
 
 // Load environment variables
 // ===================================================

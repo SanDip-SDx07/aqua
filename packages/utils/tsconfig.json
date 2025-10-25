@@ -9,14 +9,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@packages/*": ["packages/*"],
-      "@shared": ["packages/shared"],
-      "@shared/*": ["packages/shared/*"],
-      "@utils": ["packages/utils"],
-      "@utils/*": ["packages/utils/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
   "exclude": ["node_modules", "lib"]

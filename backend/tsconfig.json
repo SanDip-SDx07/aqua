@@ -12,11 +12,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@packages/*": ["packages/*"],
-      "@shared": ["packages/shared"],
-      "@shared/*": ["packages/shared/*"],
-      "@utils": ["packages/utils"],
-      "@utils/*": ["packages/utils/*"]
+      "@local-utils": ["src/@utils"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js"],
