@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "extends": "../../tsconfig.base.json",
+  // "extends": "../../tsconfig.base.json",
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }
