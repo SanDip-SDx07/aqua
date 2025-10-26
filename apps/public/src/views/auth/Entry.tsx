@@ -24,7 +24,7 @@ const entry = async (role: Role, mobile: string, address: Address) => {
   try {
     const response = await axios.post(
       "http://192.168.1.7:8000/api/v1/users/entry",
-      { mobile, role, address },
+      { mobileNumber: mobile, role, address },
       {
         headers: {
           "Content-Type": "application/json",
@@ -38,6 +38,27 @@ const entry = async (role: Role, mobile: string, address: Address) => {
     throw error; // rethrow if you want the caller to handle it
   }
 };
+
+// 🧭 Fetch current location (placeholder for now)
+async function getCurrentLocation() {
+  const address: Address = {};
+
+  try {
+    // ⚙️ Example using Expo Location (if using Expo)
+    // const { status } = await Location.requestForegroundPermissionsAsync();
+    // if (status !== "granted") throw new Error("Permission denied");
+    // const loc = await Location.getCurrentPositionAsync({});
+    // Reverse geocode to get readable address...
+    // const [place] = await Location.reverseGeocodeAsync(loc.coords);
+    // Object.assign(address, place);
+
+    address.city = "Kolkata"; // Placeholder
+  } catch (error) {
+    console.error("Location Error:", error);
+  }
+
+  return address;
+}
 
 export default function AuthEntry({
   route,
@@ -135,27 +156,6 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
       </View>
     </View>
   );
-}
-
-// 🧭 Fetch current location (placeholder for now)
-async function getCurrentLocation() {
-  const address: Address = {};
-
-  try {
-    // ⚙️ Example using Expo Location (if using Expo)
-    // const { status } = await Location.requestForegroundPermissionsAsync();
-    // if (status !== "granted") throw new Error("Permission denied");
-    // const loc = await Location.getCurrentPositionAsync({});
-    // Reverse geocode to get readable address...
-    // const [place] = await Location.reverseGeocodeAsync(loc.coords);
-    // Object.assign(address, place);
-
-    address.city = "Kolkata"; // Placeholder
-  } catch (error) {
-    console.error("Location Error:", error);
-  }
-
-  return address;
 }
 
 export const styles = StyleSheet.create({
