@@ -46,14 +46,17 @@ const packagesPath = path.resolve(projectRoot, "../../packages");
 
 const config = getDefaultConfig(projectRoot);
 
+// Make Metro aware of monorepo packages
+config.watchFolders = [packagesPath];
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, "node_modules"),
   path.resolve(projectRoot, "../../node_modules"),
 ];
 
-config.watchFolders = [packagesPath];
-
+// Add TS support
 config.resolver.sourceExts.push("ts", "tsx");
+
+// Make sure Metro prefers react-native field if exists
 config.resolver.mainFields = ["react-native", "browser", "main"];
 
 module.exports = config;

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import type { AuthEntryProps, RootStackParamList } from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
-import { isMobile } from "@aqua/utils";
+import isMobile from "@aqua/utils/isMobile";
 
 export default function AuthEntry({
   route,
