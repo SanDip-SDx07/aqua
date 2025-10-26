@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import type { AuthEntryProps, RootStackParamList } from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
-// import { isMobile } from "@aqua/utils";
+import { isMobile } from "@aqua/utils";
 
 export default function AuthEntry({
   route,
@@ -27,7 +27,7 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
     mobile: "",
   });
 
-  // const isValidMobile = isMobile(formState.mobile);
+  const isValidMobile = isMobile(formState.mobile);
 
   async function handleSubmit() {
     try {
