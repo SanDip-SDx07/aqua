@@ -1,3 +1,5 @@
+import type { ImageSourcePropType } from "react-native";
+
 // types.ts
 export type OrderStatus =
   | "Pending"
@@ -37,6 +39,16 @@ export interface Order {
   feedback?: number | undefined; // 1-5 stars
 }
 
+// Types for roles
+export type Role = "admin" | "user" | "vendor" | "member" | "rider";
+
+// Props
+export interface AuthEntryProps {
+  role: Role;
+  imageBgUrl: ImageSourcePropType;
+  imageUrl?: ImageSourcePropType;
+}
+
 export type RootStackParamList = {
   Tabs: undefined;
   ["AquaCare+"]: undefined;
@@ -45,6 +57,7 @@ export type RootStackParamList = {
   Order: { orderId?: string };
   ["Wallet History"]: undefined;
   Notification: { notificationId?: string };
+  Auth: AuthEntryProps;
 };
 
 export type Notification = {

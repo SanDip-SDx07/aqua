@@ -9,21 +9,19 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  type ImageSourcePropType,
 } from "react-native";
+import type { AuthEntryProps, RootStackParamList } from "../../../types";
+import type { StackScreenProps } from "@react-navigation/stack";
 // import { isMobile } from "@aqua/utils";
 
-// Types for roles
-type Role = "admin" | "user" | "vendor" | "member" | "rider";
-
-// Props
-interface EntryProps {
-  role: Role;
-  imageBgUrl: ImageSourcePropType;
-  imageUrl?: ImageSourcePropType;
+export default function AuthEntry({
+  route,
+}: StackScreenProps<RootStackParamList, "Auth">) {
+  const { role, imageBgUrl } = route.params;
+  return <Entry role={role} imageBgUrl={imageBgUrl} />;
 }
 
-export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
+export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
   const [formState, setFormState] = React.useState({
     username: "",
     mobile: "",
