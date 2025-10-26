@@ -38,13 +38,13 @@ app.use(
 );
 
 // Optional: Handle OPTIONS preflight
-// app.options(
-//   '*',
-//   cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//   }),
-// );
+app.options(
+  /.*/,
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  }),
+);
 
 // Example for specific origin and credentials:
 // app.use(cors({ origin: 'http://localhost:3001', credentials: true }));
@@ -75,7 +75,7 @@ app.use('/api/v1/users', userRouter);
 
 // ❌ Handle Undefined Routes
 // ===================================================
-app.all('*', (req, res, next) => {
+app.all(/.*/, (req, res, next) => {
   next(new AppError("Can't find this route on our server.", 404));
 });
 
