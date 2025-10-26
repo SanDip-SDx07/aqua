@@ -52,9 +52,8 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
   });
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const isValidMobile = formState.mobile ? isMobile(formState.mobile) : "";
-
   async function handleSubmit() {
+    const isValidMobile = formState.mobile ? isMobile(formState.mobile) : false;
     if (!isValidMobile) {
       console.warn("Invalid mobile number");
       return;
@@ -110,7 +109,9 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
               style={[styles.button, { flex: 1, marginRight: 10 }]}
               onPress={handleSubmit}
             >
-              <Text style={styles.buttonText}>Submit</Text>
+              <Text style={styles.buttonText}>
+                {loading ? "Submitting..." : "Submit"}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, { width: 50, height: 50 }]}
