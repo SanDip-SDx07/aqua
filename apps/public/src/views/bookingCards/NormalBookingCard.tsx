@@ -13,7 +13,7 @@ import {
   NotesList,
   SubscriptionCardHeader,
   Water20LLabel,
-} from "../Subscription/SubscriptionCards";
+} from "../subscription/SubscriptionCards";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";

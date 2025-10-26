@@ -2,7 +2,7 @@ import { ScrollView } from "react-native";
 import {
   SubsBaseCard,
   CustomBaseCard,
-} from "../views/Subscription/SubscriptionCards";
+} from "../views/subscription/SubscriptionCards";
 
 export function IndividualSubscription() {
   return (

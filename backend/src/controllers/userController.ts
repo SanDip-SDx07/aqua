@@ -9,8 +9,6 @@ const entry = catchAsync(async (req: Request, res: Response, next: NextFunction)
   if (!role || !username || !mobileNumber || !address || !address.city)
     return next(new AppError('Missing required fields', 400));
 
-  const aquid = generateUserId(role, address?.city, mobileNumber, username);
-
   if (!isMobile(mobileNumber)) {
     return next(new AppError('Invalid mobile number', 400));
   }
@@ -20,6 +18,7 @@ const entry = catchAsync(async (req: Request, res: Response, next: NextFunction)
 
   // if not, create new user
   if (!user) {
+    const aquid = generateUserId(role, address?.city, mobileNumber, username);
     user = await User.create({
       aquid,
       role,
