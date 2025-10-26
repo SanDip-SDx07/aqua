@@ -10,55 +10,11 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import type {
-  Address,
-  AuthEntryProps,
-  Role,
-  RootStackParamList,
-} from "../../../types";
+import type { AuthEntryProps, RootStackParamList } from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
 import isMobile from "@aqua/utils/isMobile";
-import axios from "axios";
-
-const entry = async (role: Role, mobile: string, address: Address) => {
-  try {
-    const response = await axios.post(
-      "http://192.168.1.7:8000/api/v1/users/entry",
-      { mobileNumber: mobile, role, address },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
-    return response.data; // or just `response` if you want full Axios response
-  } catch (error) {
-    console.error("Error in user entry:", error);
-    throw error; // rethrow if you want the caller to handle it
-  }
-};
-
-// 🧭 Fetch current location (placeholder for now)
-async function getCurrentLocation() {
-  const address: Address = {};
-
-  try {
-    // ⚙️ Example using Expo Location (if using Expo)
-    // const { status } = await Location.requestForegroundPermissionsAsync();
-    // if (status !== "granted") throw new Error("Permission denied");
-    // const loc = await Location.getCurrentPositionAsync({});
-    // Reverse geocode to get readable address...
-    // const [place] = await Location.reverseGeocodeAsync(loc.coords);
-    // Object.assign(address, place);
-
-    address.city = "Kolkata"; // Placeholder
-  } catch (error) {
-    console.error("Location Error:", error);
-  }
-
-  return address;
-}
+import { entry } from "../../../api";
+import { getCurrentLocation } from "../../../utils";
 
 export default function AuthEntry({
   route,
