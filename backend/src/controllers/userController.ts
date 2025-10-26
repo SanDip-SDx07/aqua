@@ -1,16 +1,18 @@
-// const catchAsync = require('../@utils/catchAsync');
-// const User = require('../models/userModel');
-// const { AppError, isMobile } = require('@utils');
+import { Request, Response, NextFunction } from 'express';
 
-// import { AppError, isMobile } from '../../../packages/utils';
-import { AppError, isMobile } from '@aqua/utils';
+import { AppError, isMobile, generateUserId } from '@aqua/utils';
 import catchAsync from '../@utils/catchAsync';
-import User from '../models/userModel';
+import User, { type IUser } from '../models/userModel';
 
-const entry = catchAsync(async (req, res, next) => {
-  const { mobileNumber, address } = req.body;
-  if (isMobile(mobileNumber)) {
-    new AppError('Invalid mobile number', 400);
+const entry = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  const { role, username, mobileNumber, address }: Partial<IUser> = req.body;
+  if (!role || !username || !mobileNumber || !address || !address.city)
+    return next(new AppError('Missing required fields', 400));
+
+  const aquid = generateUserId(role, address?.city, mobileNumber, username);
+
+  if (!isMobile(mobileNumber)) {
+    return next(new AppError('Invalid mobile number', 400));
   }
 
   // check if user exists
@@ -19,9 +21,11 @@ const entry = catchAsync(async (req, res, next) => {
   // if not, create new user
   if (!user) {
     user = await User.create({
-      username: mobileNumber,
+      aquid,
+      role,
+      username,
       mobileNumber,
-      address: address,
+      address,
       status: 'panding',
     });
   }
@@ -31,5 +35,4 @@ const entry = catchAsync(async (req, res, next) => {
 });
 
 const userController = { entry };
-
 export default userController;
