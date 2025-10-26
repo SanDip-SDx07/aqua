@@ -32,7 +32,7 @@ const app = express();
 // 🔓 Allow Cross-Origin-Resource-Sharing (CORS)
 app.use(
   cors({
-    origin: 'http://localhost:3000', // your frontend origin
+    origin: true, // your frontend origin
     credentials: true, // allow cookies
   }),
 );
@@ -41,7 +41,7 @@ app.use(
 app.options(
   /.*/,
   cors({
-    origin: 'http://localhost:3000',
+    origin: true,
     credentials: true,
   }),
 );

@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 export interface IUser extends mongoose.Document {
   aquid: string;
   role: 'admin' | 'user' | 'vendor' | 'member' | 'rider';
-  username: string;
   mobileNumber: string;
+  username?: string;
   address: {
     cuntry?: string;
     state?: string;
@@ -33,7 +33,7 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
     },
     username: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     mobileNumber: {

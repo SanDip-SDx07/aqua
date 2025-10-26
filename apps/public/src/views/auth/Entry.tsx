@@ -23,7 +23,7 @@ import axios from "axios";
 const entry = async (role: Role, mobile: string, address: Address) => {
   try {
     const response = await axios.post(
-      "https://localhost:8000/api/v1/users/entry",
+      "http://192.168.1.7:8000/api/v1/users/entry",
       { mobile, role, address },
       {
         headers: {
