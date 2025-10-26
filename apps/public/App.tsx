@@ -10,7 +10,7 @@ export default function App() {
       <Entry
         role="user"
         imageBgUrl={require("./assets/banner-2.png")}
-        imageUrl="https://example.com/logo.png"
+        // imageUrl="https://example.com/logo.png"
       />
       {/* <NavStack /> */}
     </>

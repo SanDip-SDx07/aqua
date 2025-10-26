@@ -1,5 +1,6 @@
-import { add } from "date-fns";
-import React, { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { MapPin } from "lucide-react-native";
+import React from "react";
 import {
   Image,
   ImageBackground,
@@ -8,7 +9,9 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  type ImageSourcePropType,
 } from "react-native";
+import { Line } from "react-native-svg";
 
 // Types for roles
 type Role = "admin" | "user" | "vendor" | "member" | "rider";
@@ -16,12 +19,15 @@ type Role = "admin" | "user" | "vendor" | "member" | "rider";
 // Props
 interface EntryProps {
   role: Role;
-  imageBgUrl?: string;
-  imageUrl?: string;
+  imageBgUrl: ImageSourcePropType;
+  imageUrl?: ImageSourcePropType;
 }
 
 export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
-  const [formState, setFormState] = useState({ username: "", mobile: "" });
+  const [formState, setFormState] = React.useState({
+    username: "",
+    mobile: "",
+  });
 
   async function handleSubmit() {
     try {
@@ -45,33 +51,46 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={{ uri: imageBgUrl }} style={styles.background}>
-        <View style={styles.overlay}>
-          <Image source={{ uri: imageUrl }} style={styles.logo} />
+    <View style={[{ flex: 1, position: "relative" }]}>
+      <LinearGradient colors={["#f0f8ff", "#cfe7fd"]} style={{ flex: 1 }}>
+        <ImageBackground
+          source={imageBgUrl}
+          resizeMode="cover"
+          style={styles.background}
+        />
+        {imageUrl && <Image source={imageUrl} style={styles.logo} />}
+      </LinearGradient>
 
-          <Text style={styles.title}>{role.toUpperCase()} ENTRY</Text>
+      <View style={styles.entryContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          value={formState.username}
+          onChangeText={(t) => handleChange("username", t)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Mobile Number"
+          keyboardType="phone-pad"
+          value={formState.mobile}
+          onChangeText={(t) => handleChange("mobile", t)}
+        />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            value={formState.username}
-            onChangeText={(t) => handleChange("username", t)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Mobile Number"
-            keyboardType="phone-pad"
-            value={formState.mobile}
-            onChangeText={(t) => handleChange("mobile", t)}
-          />
-
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, { flex: 1 }]}
+            onPress={handleSubmit}
+          >
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { width: 50, height: 50 }]}
+            onPress={handleSubmit}
+          >
+            <MapPin color="#fff" width={20} height={20} />
+          </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 }
@@ -105,44 +124,59 @@ async function getCurrentLocation() {
   return address;
 }
 
-// 🎨 Styling
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+export const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "center",
   },
-  overlay: {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    padding: 20,
-    alignItems: "center",
-  },
   logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-    borderRadius: 50,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignSelf: "center",
+    marginTop: 80,
+    borderWidth: 2,
+    borderColor: "#fff",
   },
-  title: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 20,
+  entryContainer: {
+    // flex: 1,
+    // position: "absolute",
+    marginTop: -60,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 10, // Android shadow
   },
   input: {
-    width: "80%",
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 10,
+    width: "100%",
+    backgroundColor: "#f5f5f5",
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    marginBottom: 16,
+    color: "#333",
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
   },
   button: {
     backgroundColor: "#007AFF",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 8,
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5,
   },
   buttonText: {
     color: "#fff",
