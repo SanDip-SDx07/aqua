@@ -12,7 +12,7 @@ import {
   type ImageSourcePropType,
   ScrollView,
 } from "react-native";
-import { Line } from "react-native-svg";
+import { isMobile } from "@aqua/utils";
 
 // Types for roles
 type Role = "admin" | "user" | "vendor" | "member" | "rider";
@@ -29,6 +29,8 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
     username: "",
     mobile: "",
   });
+
+  const isValidMobile = isMobile(formState.mobile);
 
   async function handleSubmit() {
     try {
@@ -64,12 +66,13 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
 
       <View style={styles.entryContainer}>
         <View style={styles.inputContainer}>
-          <TextInput
+          <Text style={styles.title}>Login or Signup</Text>
+          {/* <TextInput
             style={styles.input}
             placeholder="Username"
             value={formState.username}
             onChangeText={(t) => handleChange("username", t)}
-          />
+          /> */}
           <TextInput
             style={styles.input}
             placeholder="Mobile Number"
@@ -94,9 +97,16 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity>
-            <Text>Terms & Conditions</Text>
-          </TouchableOpacity>
+          <View style={styles.moreInfo}>
+            <Text>By continuing, you agree to our </Text>
+            <TouchableOpacity>
+              <Text style={{ color: "blue" }}>Terms & Conditions</Text>
+            </TouchableOpacity>
+            <Text>and</Text>
+            <TouchableOpacity>
+              <Text style={{ color: "blue" }}>Privacy Policy</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -148,7 +158,7 @@ export const styles = StyleSheet.create({
   },
   entryContainer: {
     // flex: 1,
-    height: 360,
+    height: 460,
     marginTop: -30,
     paddingHorizontal: 20,
     paddingVertical: 30,
@@ -162,7 +172,14 @@ export const styles = StyleSheet.create({
     elevation: 10, // Android shadow
   },
   inputContainer: {
+    gap: 20,
     flex: 1,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#333",
+    textAlign: "center",
   },
   input: {
     width: "100%",
@@ -176,8 +193,8 @@ export const styles = StyleSheet.create({
   },
   bottomContainer: {
     // flex: 1,
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
     gap: 10,
   },
   buttonContainer: {
@@ -189,7 +206,7 @@ export const styles = StyleSheet.create({
     gap: 10,
   },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#8a8a8aff", //007AFF
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: "center",
@@ -199,5 +216,12 @@ export const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "600",
     fontSize: 16,
+  },
+  moreInfo: {
+    flexDirection: "row",
+    gap: 5,
+    marginTop: 5,
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 });

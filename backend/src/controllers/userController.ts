@@ -9,6 +9,8 @@ const entry = catchAsync(async (req: Request, res: Response, next: NextFunction)
   if (!role || !username || !mobileNumber || !address || !address.city)
     return next(new AppError('Missing required fields', 400));
 
+  console.log('from my backend isMobile:', isMobile(mobileNumber));
+
   if (!isMobile(mobileNumber)) {
     return next(new AppError('Invalid mobile number', 400));
   }
