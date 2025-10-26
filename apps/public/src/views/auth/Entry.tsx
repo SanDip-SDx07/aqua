@@ -13,6 +13,7 @@ import {
 import type { AuthEntryProps, RootStackParamList } from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
 import isMobile from "@aqua/utils/isMobile";
+import axios from "axios";
 
 export default function AuthEntry({
   route,
@@ -22,12 +23,11 @@ export default function AuthEntry({
 }
 
 export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
-  const [formState, setFormState] = React.useState({
-    username: "",
+  const [formState, setFormState] = React.useState<{ mobile: string }>({
     mobile: "",
   });
 
-  const isValidMobile = isMobile(formState.mobile);
+  const isValidMobile = formState.mobile ? isMobile(formState.mobile) : "";
 
   async function handleSubmit() {
     try {

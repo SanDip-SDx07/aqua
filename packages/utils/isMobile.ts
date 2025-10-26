@@ -11,5 +11,5 @@ export default function isMobile(contact: string) {
   if (!isPhone) throw new AppError("Invalid contact type.", 400);
 
   // 4. Return result
-  return isPhone;
+  return isPhone || undefined;
 }
