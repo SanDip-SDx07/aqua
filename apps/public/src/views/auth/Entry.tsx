@@ -10,9 +10,8 @@ import {
   View,
   StyleSheet,
   type ImageSourcePropType,
-  ScrollView,
 } from "react-native";
-import { isMobile } from "@aqua/utils";
+// import { isMobile } from "@aqua/utils";
 
 // Types for roles
 type Role = "admin" | "user" | "vendor" | "member" | "rider";
@@ -30,7 +29,7 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
     mobile: "",
   });
 
-  const isValidMobile = isMobile(formState.mobile);
+  // const isValidMobile = isMobile(formState.mobile);
 
   async function handleSubmit() {
     try {
@@ -84,7 +83,7 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
         <View style={styles.bottomContainer}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={[styles.button, { flex: 1 }]}
+              style={[styles.button, { flex: 1, marginRight: 10 }]}
               onPress={handleSubmit}
             >
               <Text style={styles.buttonText}>Submit</Text>
@@ -100,9 +99,9 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
           <View style={styles.moreInfo}>
             <Text>By continuing, you agree to our </Text>
             <TouchableOpacity>
-              <Text style={{ color: "blue" }}>Terms & Conditions</Text>
+              <Text style={{ color: "blue" }}>Terms & Conditions </Text>
             </TouchableOpacity>
-            <Text>and</Text>
+            <Text>and </Text>
             <TouchableOpacity>
               <Text style={{ color: "blue" }}>Privacy Policy</Text>
             </TouchableOpacity>
@@ -202,8 +201,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 10,
-    gap: 10,
+    marginVertical: 15,
   },
   button: {
     backgroundColor: "#8a8a8aff", //007AFF
@@ -211,6 +209,7 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
+    height: 50,
   },
   buttonText: {
     color: "#fff",
@@ -219,7 +218,6 @@ export const styles = StyleSheet.create({
   },
   moreInfo: {
     flexDirection: "row",
-    gap: 5,
     marginTop: 5,
     flexWrap: "wrap",
     justifyContent: "center",
