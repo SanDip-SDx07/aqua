@@ -10,10 +10,34 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import type { AuthEntryProps, RootStackParamList } from "../../../types";
+import type {
+  Address,
+  AuthEntryProps,
+  Role,
+  RootStackParamList,
+} from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
 import isMobile from "@aqua/utils/isMobile";
 import axios from "axios";
+
+const entry = async (role: Role, mobile: string, address: Address) => {
+  try {
+    const response = await axios.post(
+      "https://localhost:8000/api/v1/users/entry",
+      { mobile, role, address },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data; // or just `response` if you want full Axios response
+  } catch (error) {
+    console.error("Error in user entry:", error);
+    throw error; // rethrow if you want the caller to handle it
+  }
+};
 
 export default function AuthEntry({
   route,
@@ -26,23 +50,25 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
   const [formState, setFormState] = React.useState<{ mobile: string }>({
     mobile: "",
   });
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const isValidMobile = formState.mobile ? isMobile(formState.mobile) : "";
 
   async function handleSubmit() {
-    try {
-      const address = await getCurrentLocation();
-      console.log(address);
-      const payload = {
-        ...formState,
-        role,
-        address,
-      };
+    if (!isValidMobile) {
+      console.warn("Invalid mobile number");
+      return;
+    }
 
-      console.log("Submitting:", payload);
-      // ✅ TODO: send to backend (via fetch/axios)
+    try {
+      setLoading(true);
+      const address = await getCurrentLocation();
+      await entry(role, formState.mobile, address);
+      console.log("Entry successful");
     } catch (error) {
-      console.error("Location fetch failed:", error);
+      console.error("Submission failed:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -112,15 +138,7 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
 
 // 🧭 Fetch current location (placeholder for now)
 async function getCurrentLocation() {
-  const address: {
-    country?: string;
-    state?: string;
-    city?: string;
-    area?: string;
-    street?: string;
-    pincode?: string;
-    nearbyLandmark?: string;
-  } = {};
+  const address: Address = {};
 
   try {
     // ⚙️ Example using Expo Location (if using Expo)

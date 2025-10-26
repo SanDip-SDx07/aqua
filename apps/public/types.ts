@@ -49,6 +49,16 @@ export interface AuthEntryProps {
   imageUrl?: ImageSourcePropType;
 }
 
+export interface Address {
+  country?: string;
+  state?: string;
+  city?: string;
+  area?: string;
+  street?: string;
+  pincode?: string;
+  nearbyLandmark?: string;
+}
+
 export type RootStackParamList = {
   Tabs: undefined;
   ["AquaCare+"]: undefined;

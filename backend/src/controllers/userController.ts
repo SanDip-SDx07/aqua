@@ -5,11 +5,9 @@ import catchAsync from '../@utils/catchAsync';
 import User, { type IUser } from '../models/userModel';
 
 const entry = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const { role, username, mobileNumber, address }: Partial<IUser> = req.body;
-  if (!role || !username || !mobileNumber || !address || !address.city)
+  const { role, mobileNumber, address }: Partial<IUser> = req.body;
+  if (!role || !mobileNumber || !address || !address.city)
     return next(new AppError('Missing required fields', 400));
-
-  console.log('from my backend isMobile:', isMobile(mobileNumber));
 
   if (!isMobile(mobileNumber)) {
     return next(new AppError('Invalid mobile number', 400));
@@ -20,11 +18,10 @@ const entry = catchAsync(async (req: Request, res: Response, next: NextFunction)
 
   // if not, create new user
   if (!user) {
-    const aquid = generateUserId(role, address?.city, mobileNumber, username);
+    const aquid = generateUserId(role, address?.city, mobileNumber, '');
     user = await User.create({
       aquid,
       role,
-      username,
       mobileNumber,
       address,
       status: 'panding',

@@ -10,7 +10,7 @@ function generateUserId(
   role: Role,
   cityName: string,
   mobile: string,
-  username: string
+  username?: string
 ): string {
   const cityCode = cityName.slice(0, 3).toLowerCase();
   const cleanMobile = mobile.replace(/\D/g, "");
@@ -35,7 +35,10 @@ function generateUserId(
     : "";
 
   // combine neatly like a readable username
-  return `${role}${cityCode}${namePart}${last4}${hash}`.toUpperCase();
+  if (username) {
+    return `${role}${cityCode}${namePart}${last4}${hash}`.toUpperCase();
+  }
+  return `${role}${cityCode}${last4}${hash}`.toUpperCase();
 }
 
 export default generateUserId;
