@@ -7,29 +7,29 @@ import { AppError, isMobile } from '@aqua/utils';
 import catchAsync from '../@utils/catchAsync';
 import User from '../models/userModel';
 
-const entry = async (mobileNumber: number) => {};
+const entry = catchAsync(async (req, res, next) => {
+  const { mobileNumber, address } = req.body;
+  if (isMobile(mobileNumber)) {
+    new AppError('Invalid mobile number', 400);
+  }
 
-const userController = {
-  login: catchAsync(async (req, res, next) => {
-    const { mobileNumber } = req.body;
-    if (isMobile(mobileNumber)) {
-      new AppError('Invalid mobile number', 400);
-    }
+  // check if user exists
+  let user = await User.findOne({ mobileNumber });
 
-    // Logic to authenticate user
-    const user = await User.findOne({ mobileNumber });
-    if (!user) {
-      return next(new AppError('User not found', 404));
-    }
+  // if not, create new user
+  if (!user) {
+    user = await User.create({
+      username: mobileNumber,
+      mobileNumber,
+      address: address,
+      status: 'panding',
+    });
+  }
 
-    res.status(200).json({ status: 'success', message: 'Login successful', user });
-  }),
+  // if exists, return user
+  res.status(200).json({ status: 'success', message: 'Login successful', user });
+});
 
-  me: catchAsync(async (req, res, next) => {
-    const userId = req.params.id;
-    // Logic to retrieve user profile from database
-    res.json({ message: `User profile for user ID: ${userId}` });
-  }),
-};
+const userController = { entry };
 
 export default userController;

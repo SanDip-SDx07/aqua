@@ -27,7 +27,8 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['active', 'blocked'],
+      enum: ['panding', 'active', 'blocked'],
+      default: 'active',
       required: true,
     },
   },

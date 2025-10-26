@@ -2,11 +2,6 @@
 
 // Core Dependencies
 // ==================================================
-// const express = require('express');
-// const cors = require('cors');
-// const rateLimit = require('express-rate-limit');
-// const cookieParser = require('cookie-parser');
-// const dotenv = require('dotenv');
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -14,13 +9,13 @@ import dotenv from 'dotenv';
 
 // Import custom modules
 // ===================================================
-// const connectMongoDB = require('./@config/connectMongoDB');
-// const { connectRedis } = require("./config/connectRedis");
-// const globalRouteHandler = require("./@utils/globalRouteHandler");
-// const { AppError } = require('@utils');
-// const userRouter = require("./routes/userRouter/userRouter-Index");
-// import { AppError } from '@utils';
+import { AppError } from '@aqua/utils';
 import connectMongoDB from './@config/connectMongoDB';
+import globalRouteHandler from './@utils/globalRouteHandler';
+
+// Import Routes
+// ===================================================
+import userRouter from './routes/userRoutes';
 
 // Load environment variables
 // ===================================================
@@ -44,9 +39,9 @@ app.use(
 
 // Optional: Handle OPTIONS preflight
 // app.options(
-//   "*",
+//   '*',
 //   cors({
-//     origin: "http://localhost:3000",
+//     origin: 'http://localhost:3000',
 //     credentials: true,
 //   }),
 // );
@@ -76,17 +71,17 @@ app.use(express.json());
 
 // 📌 API Routes
 // ===================================================
-// app.use("/api/v1/users", userRouter);
+app.use('/api/v1/users', userRouter);
 
 // ❌ Handle Undefined Routes
 // ===================================================
-// app.all("*", (req, res, next) => {
-//   next(new AppError("Can't find this route on our server.", 404));
-// });
+app.all('*', (req, res, next) => {
+  next(new AppError("Can't find this route on our server.", 404));
+});
 
 // 🛡 Global Error Handler Middleware
 // ===================================================
-// app.use(globalRouteHandler);
+app.use(globalRouteHandler);
 
 // 🚀 Server Start Function
 // ===================================================
