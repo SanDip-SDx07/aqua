@@ -10,11 +10,15 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import type { AuthEntryProps, RootStackParamList } from "../../../types";
+import type {
+  AuthEntryProps,
+  Address,
+  RootStackParamList,
+} from "../../../types";
 import type { StackScreenProps } from "@react-navigation/stack";
 import isMobile from "@aqua/utils/isMobile";
 import { entry } from "../../../api";
-import { getCurrentLocation } from "../../../utils";
+import { getCurrentLocation } from "@aqua/utils";
 
 export default function AuthEntry({
   route,
@@ -24,10 +28,22 @@ export default function AuthEntry({
 }
 
 export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
-  const [formState, setFormState] = React.useState<{ mobile: string }>({
+  const [formState, setFormState] = React.useState<{
+    mobile: string;
+    address: Address;
+  }>({
     mobile: "",
+    address: {},
   });
   const [loading, setLoading] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    // Request location permission on mount
+    (async () => {
+      const address = await getCurrentLocation();
+      setFormState((prev) => ({ ...prev, address }));
+    })();
+  }, []);
 
   async function handleSubmit() {
     const isValidMobile = formState.mobile ? isMobile(formState.mobile) : false;
@@ -38,8 +54,7 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
 
     try {
       setLoading(true);
-      const address = await getCurrentLocation();
-      await entry(role, formState.mobile, address);
+      await entry(role, formState.mobile, formState?.address);
       console.log("Entry successful");
     } catch (error) {
       console.error("Submission failed:", error);
@@ -92,7 +107,10 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, { width: 50, height: 50 }]}
-              onPress={handleSubmit}
+              onPress={async () => {
+                const address = await getCurrentLocation();
+                setFormState((prev) => ({ ...prev, address }));
+              }}
             >
               <MapPin color="#fff" width={20} height={20} />
             </TouchableOpacity>

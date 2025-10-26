@@ -1,5 +1,5 @@
 import * as Location from "expo-location";
-import type { Address } from "../types";
+import type { Address } from "../../apps/public/types";
 
 // Fetch current location and return a detailed address.
 async function getCurrentLocation(): Promise<Address> {
@@ -12,24 +12,16 @@ async function getCurrentLocation(): Promise<Address> {
       throw new Error("Location permission denied");
     }
 
-    console.log(status);
-
     // 2️⃣ Get current position
     const location = await Location.getCurrentPositionAsync({
       accuracy: Location.Accuracy.Highest,
     });
 
-    console.log(location);
-
     const { latitude, longitude } = location.coords;
-
-    console.log(latitude, longitude);
 
     // 3️⃣ Reverse geocode to get human-readable address
     const places = await Location.reverseGeocodeAsync({ latitude, longitude });
     const place = places[0]; // Take the first result
-
-    console.log(place);
 
     // 4️⃣ Map to our Address interface
     if (!place) throw new Error("Unable to fetch address from location");
