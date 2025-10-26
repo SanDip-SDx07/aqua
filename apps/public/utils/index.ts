@@ -1,1 +1,1 @@
-export { default as getCurrentLocation } from "./getCurLocation";
+export { default as getCurrentLocation } from "./getCurLocation.native";
