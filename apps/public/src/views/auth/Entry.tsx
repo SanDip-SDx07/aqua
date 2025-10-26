@@ -10,6 +10,7 @@ import {
   View,
   StyleSheet,
   type ImageSourcePropType,
+  ScrollView,
 } from "react-native";
 import { Line } from "react-native-svg";
 
@@ -51,7 +52,7 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
   }
 
   return (
-    <View style={[{ flex: 1, position: "relative" }]}>
+    <View style={[{ flex: 1 }]}>
       <LinearGradient colors={["#f0f8ff", "#cfe7fd"]} style={{ flex: 1 }}>
         <ImageBackground
           source={imageBgUrl}
@@ -62,32 +63,39 @@ export default function Entry({ role, imageBgUrl, imageUrl }: EntryProps) {
       </LinearGradient>
 
       <View style={styles.entryContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={formState.username}
-          onChangeText={(t) => handleChange("username", t)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Mobile Number"
-          keyboardType="phone-pad"
-          value={formState.mobile}
-          onChangeText={(t) => handleChange("mobile", t)}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={formState.username}
+            onChangeText={(t) => handleChange("username", t)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Mobile Number"
+            keyboardType="phone-pad"
+            value={formState.mobile}
+            onChangeText={(t) => handleChange("mobile", t)}
+          />
+        </View>
+        <View style={styles.bottomContainer}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, { flex: 1 }]}
+              onPress={handleSubmit}
+            >
+              <Text style={styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, { width: 50, height: 50 }]}
+              onPress={handleSubmit}
+            >
+              <MapPin color="#fff" width={20} height={20} />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.button, { flex: 1 }]}
-            onPress={handleSubmit}
-          >
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, { width: 50, height: 50 }]}
-            onPress={handleSubmit}
-          >
-            <MapPin color="#fff" width={20} height={20} />
+          <TouchableOpacity>
+            <Text>Terms & Conditions</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -140,8 +148,8 @@ export const styles = StyleSheet.create({
   },
   entryContainer: {
     // flex: 1,
-    // position: "absolute",
-    marginTop: -60,
+    height: 360,
+    marginTop: -30,
     paddingHorizontal: 20,
     paddingVertical: 30,
     backgroundColor: "#fff",
@@ -153,6 +161,9 @@ export const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 10, // Android shadow
   },
+  inputContainer: {
+    flex: 1,
+  },
   input: {
     width: "100%",
     backgroundColor: "#f5f5f5",
@@ -163,12 +174,19 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
     color: "#333",
   },
+  bottomContainer: {
+    // flex: 1,
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 10,
+  },
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
+    gap: 10,
   },
   button: {
     backgroundColor: "#007AFF",
@@ -176,7 +194,6 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: 5,
   },
   buttonText: {
     color: "#fff",
