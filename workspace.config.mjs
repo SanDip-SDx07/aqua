@@ -4,13 +4,15 @@ import { exec } from "child_process";
 const workspaces = [
   "apps/public",
   "backend",
-  "packages/shared",
-  "packages/utils",
+  "packages",
+  // "packages/shared",
+  // "packages/utils",
 ];
 
 // const { workspaces } = JSON.parse(fs.readFileSync("./monorepo.json", "utf8"));
 for (const folder of workspaces) {
-  if (fs.existsSync(`${folder}/package.json`)) {
+  // fs.existsSync(`${folder}/package.json`) && exec(`code "${folder}"`);
+  if (fs.existsSync(`${folder}`)) {
     console.log(`Opening ${folder}...`);
     exec(`code "${folder}"`);
   }
