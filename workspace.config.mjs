@@ -1,21 +1,28 @@
-import fs from "fs";
+#!/usr/bin/env node
 import { exec } from "child_process";
 
-const workspaces = [
+// === 🧱 Define your monorepo workspaces here ===
+const WORKSPACES = [
+  "apps",
   "apps/public",
+  "apps/admin",
   "backend",
   "packages",
-  // "packages/shared",
-  // "packages/utils",
+  "packages/shared",
+  "packages/utils",
 ];
 
-// const { workspaces } = JSON.parse(fs.readFileSync("./monorepo.json", "utf8"));
-for (const folder of workspaces) {
-  // fs.existsSync(`${folder}/package.json`) && exec(`code "${folder}"`);
-  if (fs.existsSync(`${folder}`)) {
-    console.log(`Opening ${folder}...`);
-    exec(`code "${folder}"`);
-  }
+// === 🧠 Parse arguments ===
+// If user passes folders, open only those; otherwise open all
+const args = process.argv.slice(2);
+const targets = args.length > 0 ? args : WORKSPACES;
+
+// === 🚀 Open folders ===
+for (const folder of targets) {
+  console.log(`🟢 Opening ${folder} in VS Code...`);
+  exec(`code "${folder}"`, (err) => {
+    if (err) console.error(`❌ Failed to open ${folder}:`, err.message);
+  });
 }
 
 /* # Alternative Bash Script
