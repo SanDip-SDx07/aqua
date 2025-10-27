@@ -12,7 +12,7 @@ export default function AuthStack() {
         component={AuthEntry}
         initialParams={{
           role: "user",
-          imageBgUrl: require("../../assets/banner-2.png"),
+          imageBgUrl: require("../../../assets/banner-2.png"),
         }}
         options={{ headerShown: false }}
       />

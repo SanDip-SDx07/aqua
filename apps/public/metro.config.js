@@ -38,25 +38,54 @@
  *
  *
  */
+// const path = require("path");
+// const { getDefaultConfig } = require("expo/metro-config");
+
+// const projectRoot = __dirname;
+// const packagesPath = path.resolve(projectRoot, "../../packages");
+
+// const config = getDefaultConfig(projectRoot);
+
+// // Make Metro aware of monorepo packages
+// config.watchFolders = [packagesPath];
+// config.resolver.nodeModulesPaths = [
+//   path.resolve(projectRoot, "node_modules"),
+//   path.resolve(projectRoot, "../../node_modules"),
+// ];
+
+// // Add TS support
+// config.resolver.sourceExts.push("ts", "tsx");
+
+// // Make sure Metro prefers react-native field if exists
+// config.resolver.mainFields = ["react-native", "browser", "main"];
+
+// module.exports = config;
+
 const path = require("path");
 const { getDefaultConfig } = require("expo/metro-config");
 
 const projectRoot = __dirname;
-const packagesPath = path.resolve(projectRoot, "../../packages");
+const workspaceRoot = path.resolve(projectRoot, "../..");
 
 const config = getDefaultConfig(projectRoot);
 
-// Make Metro aware of monorepo packages
-config.watchFolders = [packagesPath];
+// ✅ Watch root packages (for monorepo)
+config.watchFolders = [workspaceRoot];
+
+// ✅ Always resolve these from the workspace root to avoid duplicates
 config.resolver.nodeModulesPaths = [
   path.resolve(projectRoot, "node_modules"),
-  path.resolve(projectRoot, "../../node_modules"),
+  path.resolve(workspaceRoot, "node_modules"),
 ];
 
-// Add TS support
-config.resolver.sourceExts.push("ts", "tsx");
-
-// Make sure Metro prefers react-native field if exists
-config.resolver.mainFields = ["react-native", "browser", "main"];
+// ✅ Force these shared packages to resolve from one place
+config.resolver.extraNodeModules = {
+  react: path.resolve(workspaceRoot, "node_modules/react"),
+  "react-native": path.resolve(workspaceRoot, "node_modules/react-native"),
+  "@react-navigation": path.resolve(
+    workspaceRoot,
+    "node_modules/@react-navigation"
+  ),
+};
 
 module.exports = config;

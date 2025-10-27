@@ -66,3 +66,21 @@ export const useAuth = () => {
   }
   return context;
 };
+
+const checkUserToken = async (dispatch: React.Dispatch<AuthActionType>) => {
+  const token = await AsyncStorage.getItem("user_token");
+  dispatch({ type: "LOGIN", token: token ?? "" });
+};
+
+const login = async (
+  dispatch: React.Dispatch<AuthActionType>,
+  token: string
+) => {
+  await AsyncStorage.setItem("userToken", token);
+  dispatch({ type: "LOGIN", token });
+};
+
+const logout = async (dispatch: React.Dispatch<AuthActionType>) => {
+  await AsyncStorage.removeItem("userToken");
+  dispatch({ type: "LOGOUT" });
+};

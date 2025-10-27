@@ -1,11 +1,11 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import AuthProvider from "./AuthContext";
 import MainStack from "./(stacks)/MainStack";
 
 export default function NavStack() {
   return (
-    <NavigationContainer>
+    <AuthProvider>
       <MainStack />
-    </NavigationContainer>
+    </AuthProvider>
   );
 }

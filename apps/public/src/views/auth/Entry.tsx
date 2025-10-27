@@ -18,7 +18,7 @@ import type {
 import type { StackScreenProps } from "@react-navigation/stack";
 import isMobile from "@aqua/utils/isMobile";
 import { entry } from "../../../api";
-import { getCurrentLocation } from "@aqua/utils";
+import getCurrentLocation from "@aqua/utils/getCurLocation.native";
 
 export default function AuthEntry({
   route,
@@ -35,7 +35,6 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
     mobile: "",
     address: {},
   });
-  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     // Request location permission on mount
@@ -53,13 +52,11 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
     }
 
     try {
-      setLoading(true);
-      await entry(role, formState.mobile, formState?.address);
+      const status = await entry(role, formState.mobile, formState?.address);
+      console.log("Entry status:", status);
       console.log("Entry successful");
     } catch (error) {
       console.error("Submission failed:", error);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -101,9 +98,7 @@ export function Entry({ role, imageBgUrl, imageUrl }: AuthEntryProps) {
               style={[styles.button, { flex: 1, marginRight: 10 }]}
               onPress={handleSubmit}
             >
-              <Text style={styles.buttonText}>
-                {loading ? "Submitting..." : "Submit"}
-              </Text>
+              <Text style={styles.buttonText}>"Submit"</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, { width: 50, height: 50 }]}
