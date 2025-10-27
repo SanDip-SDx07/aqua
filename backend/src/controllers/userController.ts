@@ -18,7 +18,7 @@ const entry = catchAsync(async (req: Request, res: Response, next: NextFunction)
 
   // if not, create new user
   if (!user) {
-    const aquid = generateUserId(role, address?.city, mobileNumber, '');
+    const aquid = generateUserId(role, address?.city, mobileNumber);
     user = await User.create({
       aquid,
       role,
