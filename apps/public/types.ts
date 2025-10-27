@@ -60,16 +60,17 @@ export interface Address {
 }
 
 export type RootStackParamList = {
+  MainStack: undefined;
+  AuthStack: undefined;
   Tabs: undefined;
+  ModalStack: undefined;
+  Auth: AuthEntryProps;
   ["AquaCare+"]: undefined;
   ["Subscription"]: undefined;
   ["Subscription Terms"]: undefined;
-  Order: { orderId?: string };
+  ["Order"]: { orderId?: string };
   ["Wallet History"]: undefined;
-  Notification: { notificationId?: string };
-  Auth: AuthEntryProps;
-  ModalStack: undefined;
-  AuthStack: undefined;
+  ["Notification"]: { notificationId?: string };
 };
 
 export type Notification = {

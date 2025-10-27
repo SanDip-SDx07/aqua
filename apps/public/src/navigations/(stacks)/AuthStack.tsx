@@ -1,8 +1,8 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthEntry from "../../views/auth/Entry";
 import type { RootStackParamList } from "../../../types";
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AuthStack() {
   return (

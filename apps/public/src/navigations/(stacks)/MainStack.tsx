@@ -13,20 +13,20 @@ export default function MainStack() {
   // const { authState } = useAuth();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {false ? (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
-        ) : (
-          <Stack.Group>
-            {/* Main */}
-            <Stack.Screen name="Tabs" component={TabNavBottom} />
+    // <NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {false ? (
+        <Stack.Screen name="AuthStack" component={AuthStack} />
+      ) : (
+        <Stack.Group>
+          {/* Main */}
+          <Stack.Screen name="Tabs" component={TabNavBottom} />
 
-            {/* ModalStack */}
-            <Stack.Screen name="ModalStack" component={ModalStack} />
-          </Stack.Group>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+          {/* ModalStack */}
+          <Stack.Screen name="ModalStack" component={ModalStack} />
+        </Stack.Group>
+      )}
+    </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
