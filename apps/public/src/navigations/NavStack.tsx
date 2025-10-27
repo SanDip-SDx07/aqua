@@ -2,15 +2,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import type { RootStackParamList } from "../../types";
-
-import NavBottom from "./NavBottom";
-import QAIModel from "../modals/QAIModal";
-import SubsModel from "../modals/SubsModal";
-import STCModel from "../modals/STCModal";
-import OrderModalScreen from "../modals/OrderModal";
-import TransactionHistory from "../modals/WHModal";
-import NotificationModelScreen from "../modals/NotifyModal";
-import AuthEntry from "../views/auth/Entry";
+import ModalStack from "./ModalStack";
+import AuthStack from "./AuthStack";
+import TabNavBottom from "./TabNavBottom";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,57 +15,16 @@ export default function NavStack({
 }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {loginOptions.authScreen ? (
-          <Stack.Screen
-            name="Auth"
-            component={AuthEntry}
-            initialParams={{
-              role: "user",
-              imageBgUrl: require("../../assets/banner-2.png"),
-            }}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="AuthStack" component={AuthStack} />
         ) : (
           <Stack.Group>
             {/* Main */}
-            <Stack.Screen
-              name="Tabs"
-              component={NavBottom}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="Tabs" component={TabNavBottom} />
 
-            {/* Model */}
-            <Stack.Screen
-              name="AquaCare+"
-              component={QAIModel}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
-            <Stack.Screen
-              name="Subscription"
-              component={SubsModel}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
-            <Stack.Screen
-              name="Subscription Terms"
-              component={STCModel}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
-            <Stack.Screen
-              name="Order"
-              component={OrderModalScreen}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
-            <Stack.Screen
-              name="Wallet History"
-              component={TransactionHistory}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
-            <Stack.Screen
-              name="Notification"
-              component={NotificationModelScreen}
-              options={{ headerShown: true, presentation: "modal" }}
-            />
+            {/* ModalStack */}
+            <Stack.Screen name="ModalStack" component={ModalStack} />
           </Stack.Group>
         )}
       </Stack.Navigator>

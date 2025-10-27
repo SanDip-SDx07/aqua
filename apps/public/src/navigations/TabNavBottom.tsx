@@ -12,7 +12,7 @@ import ProfileScreen from "../screens/profile/Profile";
 
 const BottomTabs = createBottomTabNavigator();
 
-export default function NavBottom() {
+export default function TabNavBottom() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["bottom"]}>
       <BottomTabs.Navigator

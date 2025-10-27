@@ -68,6 +68,8 @@ export type RootStackParamList = {
   ["Wallet History"]: undefined;
   Notification: { notificationId?: string };
   Auth: AuthEntryProps;
+  ModalStack: undefined;
+  AuthStack: undefined;
 };
 
 export type Notification = {
