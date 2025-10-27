@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import NavStack from "./src/navigations/NavStack";
+import NavStack from "./src/navigations/(stacks)/MainStack";
 import Entry from "./src/views/auth/Entry";
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
         imageBgUrl={require("./assets/banner-2.png")}
         // imageUrl="https://example.com/logo.png"
       /> */}
-      <NavStack loginOptions={{ authScreen: true, id: "" }} />
+      <NavStack />
     </>
   );
 }

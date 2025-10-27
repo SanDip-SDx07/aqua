@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import AuthEntry from "../views/auth/Entry";
-import type { RootStackParamList } from "../../types";
+import AuthEntry from "../../views/auth/Entry";
+import type { RootStackParamList } from "../../../types";
 
 const Stack = createStackNavigator<RootStackParamList>();
 

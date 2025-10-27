@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import type { RootStackParamList } from "../../types";
+import type { RootStackParamList } from "../../../types";
 
-import QAIModel from "../modals/QAIModal";
-import SubsModel from "../modals/SubsModal";
-import STCModel from "../modals/STCModal";
-import OrderModalScreen from "../modals/OrderModal";
-import TransactionHistory from "../modals/WHModal";
-import NotificationModelScreen from "../modals/NotifyModal";
+import QAIModel from "../../modals/QAIModal";
+import SubsModel from "../../modals/SubsModal";
+import STCModel from "../../modals/STCModal";
+import OrderModalScreen from "../../modals/OrderModal";
+import TransactionHistory from "../../modals/WHModal";
+import NotificationModelScreen from "../../modals/NotifyModal";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function ModalStack() {
