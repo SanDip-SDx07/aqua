@@ -1,26 +1,4 @@
-aqua/ <- Root monorepo
-├── apps/
-│ ├── aqua-public/
-│ │ └── package.json
-│ ├── aqua-vendor/
-│ │ └── package.json
-│ ├── aqua-executive/
-│ │ └── package.json
-│ └── aqua-partner/
-│ └── package.json
-├── packages/
-│ └── aqua-shared/
-│ └── package.json
-├── backend/
-│ ├── src/
-│ │ └── server.ts
-│ ├── package.json
-│ └── tsconfig.json
-├── tsconfig.base.json
-├── tsconfig.json <- Root TS references
-└── package.json <- Root
-
-C:\Users\sandi\Downloads\Projects\aqua>tree /A /F
+C:\Users\sandi\Downloads\Projects\aqua>tree /F /A
 Folder PATH listing
 Volume serial number is 76D0-0D76
 C:.
@@ -28,166 +6,188 @@ C:.
 | aqua.code-workspace
 | monorepo.md
 | package.json
-| tsconfig.base.json
 | tsconfig.json
-| yarn.lock
 |
 +---apps
-| \---aqua-public
-| | .gitignore
-| | app.json
-| | App.tsx
-| | BUILD_GUIDE.js
-| | eas.json
-| | index.ts
-| | package-lock.json
-| | package.json
-| | tsconfig.json
-| | types.ts
-| | \_package
-| |
-| +---.expo
+| +---public
+| | | .gitignore
+| | | app.json
+| | | App.tsx
+| | | BUILD_GUIDE.js
+| | | eas.json
+| | | index.ts
+| | | metro.config.js
+| | | package.json
+| | | tsconfig.json
+| | | types.ts
+| | | **package.txt
+| | | **package2.txt
+| | | **tsconfig.txt
+| | |
+| | +---.expo
 | | | devices.json
 | | | README.md
 | | |
-| | \---web
-| | \---cache
-| | \---production
-| | \---images
-| | \---favicon
-| | \---favicon-24272cdaeff82cc5facdaccd982a6f05b60c4504704bbf94c19a6388659880bb-contain-transparent
-| | favicon-48.png
-| |
-| +---.vscode
-| +---assets
-| | 20L-nobg.svg
-| | 20l.png
-| | adaptive-icon.png
-| | banner-1.png
-| | banner-2.png
-| | banner-3.jpg
-| | favicon.png
-| | file.svg
-| | icon.png
-| | splash-icon.png
-| | WaterJarIcon.tsx
-| |
-| +---components
-| | CallButton.tsx
-| | DaysSlider.tsx
-| | MessageButton.tsx
-| | QuickPopup.tsx
-| |
-| +---constants
-| | styles.ts
-| |
-| +---data
-| | notifications.ts
-| | orders.ts
-| | transactions.ts
-| |
-| +---modals
-| | NotifyModal.tsx
-| | OrderModal.tsx
-| | QAIModal.tsx
-| | STCModal.tsx
-| | SubsModal.tsx
-| | WHModal.tsx
-| |
-| +---navigations
-| | NavBottom.tsx
-| | NavStack.tsx
-| |
-| +---node_modules
-| | \---.bin
-| | expo
-| | expo-modules-autolinking
-| | expo-modules-autolinking.cmd
-| | expo.cmd
-| | fingerprint
-| | fingerprint.cmd
-| | prettier
-| | prettier.cmd
-| | react-native
-| | react-native.cmd
-| | rnc-cli
-| | rnc-cli.cmd
-| | tsc
-| | tsc.cmd
-| | tsserver
-| | tsserver.cmd
-| |
-| +---screens
-| | | Notification.tsx
+| | +---api
+| | | entry.ts
+| | | index.ts
 | | |
-| | +---home
-| | | Home.tsx
-| | | HomeContext.tsx
+| | +---assets
+| | | 20L-nobg.svg
+| | | 20l.png
+| | | adaptive-icon.png
+| | | banner-1.png
+| | | banner-2.png
+| | | banner-3.jpg
+| | | favicon.png
+| | | file.svg
+| | | icon.png
+| | | splash-icon.png
+| | | WaterJarIcon.tsx
 | | |
-| | +---orders
-| | | OrderContext.tsx
-| | | OrderParts.tsx
-| | | Orders.tsx
+| | +---data
+| | | entry.ts
+| | | notifications.ts
+| | | orders.ts
+| | | transactions.ts
 | | |
-| | +---profile
-| | | Profile.tsx
-| | | ProfileContext.tsx
+| | +---src
+| | | +---components
+| | | | CallButton.tsx
+| | | | DaysSlider.tsx
+| | | | MessageButton.tsx
+| | | | QuickPopup.tsx
+| | | |
+| | | +---constants
+| | | | styles.ts
+| | | |
+| | | +---modals
+| | | | NotifyModal.tsx
+| | | | OrderModal.tsx
+| | | | QAIModal.tsx
+| | | | STCModal.tsx
+| | | | SubsModal.tsx
+| | | | WHModal.tsx
+| | | |
+| | | +---navigations
+| | | | | AuthContext.tsx
+| | | | | NavStack.tsx
+| | | | |
+| | | | +---(stacks)
+| | | | | AuthStack.tsx
+| | | | | MainStack.tsx
+| | | | | ModalStack.tsx
+| | | | |
+| | | | \---(tabs)
+| | | | TabNavBottom.tsx
+| | | |
+| | | +---screens
+| | | | | Notification.tsx
+| | | | |
+| | | | +---home
+| | | | | Home.tsx
+| | | | | HomeContext.tsx
+| | | | |
+| | | | +---orders
+| | | | | OrderContext.tsx
+| | | | | OrderParts.tsx
+| | | | | Orders.tsx
+| | | | |
+| | | | +---profile
+| | | | | Profile.tsx
+| | | | | ProfileContext.tsx
+| | | | |
+| | | | \---wallet
+| | | | WalletContext.tsx
+| | | | Wallets.tsx
+| | | |
+| | | \---views
+| | | +---auth
+| | | | Entry.tsx
+| | | |
+| | | +---bookingCards
+| | | | NormalBookingCard.tsx
+| | | |
+| | | +---orders
+| | | +---qualityAssurance
+| | | | QualityAssuranceCard.tsx
+| | | |
+| | | \---subscription
+| | | SubscribedCard.tsx
+| | | SubscriptionCards.tsx
+| | | SubsDisplayCard.tsx
 | | |
-| | \---wallet
-| | WalletContext.tsx
-| | Wallets.tsx
+| | \---utils
+| | index.ts
 | |
-| \---views
-| +---bookingCards
-| | NormalBookingCard.tsx
-| |
-| +---Orders
-| +---QualityAssurance
-| | QualityAssuranceCard.tsx
-| |
-| \---Subscription
-| SubscribedCard.tsx
-| SubscriptionCards.tsx
-| SubsDisplayCard.tsx
-|
+| \---vendor
 +---backend
 | | .eslintrc.js
 | | config.env
+| | index.ts
 | | package.json
 | | prettier.config.js
-| | \_\_tsconfig.js
+| | **package.txt
+| | **tsconfig.txt
 | |
 | \---src
-| | server.js
+| | server.ts
 | |
 | +---@config
-| | connectMongoDB.js
+| | connectMongoDB.ts
 | | connectRedis.js
 | |
 | +---@service
 | +---@utils
-| | catchAsync.js
-| | globalRouteHandler.js
+| | catchAsync.ts
+| | globalRouteHandler.ts
 | |
 | +---controllers
-| | userController.js
+| | userController.ts
 | |
 | +---models
-| | userModel.js
+| | userModel.ts
 | |
 | \---routes
+| userRoutes.ts
+|
 \---packages
 +---shared
-| | index.ts
-| | package.json
-| | tsconfig.json
-| |
-| \---components
 | index.ts
+| package.json
 |
 \---utils
 AppError.ts
+generateUserID.native.ts
+generateUserID.node.ts
+getCurLocation.native.ts
 index.ts
 isMobile.ts
 package.json
-tsconfig.json
+**package.txt
+
+C:\Users\sandi\Downloads\Projects\aqua>
+
+app/
+├─ \_layout.tsx // Root layout = replaces NavStack + MainStack
+├─ index.tsx // Default landing (Welcome / Entry)
+│
+├─ (auth)/ // Auth group
+│ ├─ \_layout.tsx
+│ └─ entry.tsx // From src/views/auth/Entry.tsx
+│
+├─ (tabs)/ // Tabs group
+│ ├─ \_layout.tsx // Replaces TabNavBottom
+│ ├─ home.tsx // From screens/home/Home.tsx
+│ ├─ orders.tsx // From screens/orders/Orders.tsx
+│ ├─ wallet.tsx // From screens/wallet/Wallets.tsx
+│ └─ profile.tsx // From screens/profile/Profile.tsx
+│
+├─ modals/ // Modal routes (if any)
+│ ├─ \_layout.tsx
+│ ├─ notify.tsx // From NotifyModal.tsx
+│ ├─ order.tsx // From OrderModal.tsx
+│ ├─ subs.tsx // From SubsModal.tsx
+│ └─ qa.tsx // From QAIModal.tsx
+│
+└─ notification.tsx // From screens/Notification.tsx
